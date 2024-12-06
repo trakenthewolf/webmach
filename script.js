@@ -451,6 +451,36 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // Función para enviar eventos a Google Analytics
+    function sendGAEvent(category, action, label) {
+        if (typeof gtag !== 'undefined') {
+            gtag('event', action, {
+                'event_category': category,
+                'event_label': label
+            });
+        }
+    }
+
+    // Ejemplo de uso en el formulario de contacto
+    if (contactForm) {
+        contactForm.addEventListener('submit', async function(e) {
+            // ... código existente del submit ...
+            
+            // Agregar evento de Analytics
+            sendGAEvent('Contact', 'Form Submit', 'Contact Form');
+            
+            // ... resto del código ...
+        });
+    }
+
+    // Rastrear clics en enlaces de servicios
+    document.querySelectorAll('.service-card .btn-primary').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const serviceTitle = this.closest('.service-card').querySelector('.service-title').textContent;
+            sendGAEvent('Services', 'View Service', serviceTitle);
+        });
+    });
 });
 
 // Mejora del rendimiento del scroll
