@@ -1680,153 +1680,211 @@ a:focus {
     margin-bottom: 0;
 }
 
-/* Estilos actualizados para el cuadro flotante */
+/* Estilos base */
 .floating-survey {
     position: fixed;
-    top: 50%;
-    right: 30px;
-    transform: translateY(-50%);
-    width: 350px;
-    background: linear-gradient(145deg, rgba(0, 0, 0, 0.95), rgba(20, 20, 20, 0.95));
-    border-left: 4px solid var(--cyber-green);
-    padding: 25px;
     z-index: 1000;
-    backdrop-filter: blur(10px);
-    box-shadow: -5px 0 30px rgba(57, 255, 20, 0.2);
-    clip-path: polygon(
-        0 0,
-        100% 0,
-        100% 85%,
-        95% 100%,
-        0 100%
-    );
+    display: none;
 }
 
-.floating-survey h4 {
-    color: var(--cyber-green);
-    font-size: 1.6rem;
-    margin-bottom: 15px;
-    font-family: 'Orbitron', sans-serif;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
-}
-
-.floating-survey h4 i {
-    color: #FFD700;
-    font-size: 2rem;
-    animation: shakeGift 2s infinite;
-}
-
-.floating-survey p {
-    color: #fff;
-    font-size: 1rem;
-    line-height: 1.6;
-    margin-bottom: 20px;
-    border-left: 2px solid var(--cyber-green);
-    padding-left: 10px;
-}
-
-.floating-survey .btn {
-    width: 100%;
-    background: var(--cyber-green);
-    color: #000;
-    font-weight: 600;
-    padding: 12px;
-    border: none;
-    clip-path: polygon(
-        0 0,
-        95% 0,
-        100% 30%,
-        100% 100%,
-        5% 100%,
-        0 70%
-    );
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-}
-
-.floating-survey .btn:hover {
-    transform: translateX(5px);
-    background: #FFD700;
-    box-shadow: -5px 0 20px rgba(255, 215, 0, 0.3);
-}
-
-.survey-close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: transparent;
-    border: none;
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.survey-close:hover {
-    color: var(--cyber-green);
-    transform: scale(1.1);
-}
-
-@keyframes shakeGift {
-    0%, 100% { transform: rotate(0); }
-    25% { transform: rotate(-10deg); }
-    75% { transform: rotate(10deg); }
-}
-
-/* Animación de entrada */
-@keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translate(100%, -50%);
+/* Estilos para desktop */
+@media (min-width: 769px) {
+    .floating-survey {
+        top: 50%;
+        right: 30px;
+        transform: translateY(-50%);
+        width: 350px;
+        background: linear-gradient(145deg, rgba(0, 0, 0, 0.95), rgba(20, 20, 20, 0.95));
+        border-left: 4px solid var(--cyber-green);
+        padding: 25px;
+        backdrop-filter: blur(10px);
+        box-shadow: -5px 0 30px rgba(57, 255, 20, 0.2);
+        clip-path: polygon(
+            0 0,
+            100% 0,
+            100% 85%,
+            95% 100%,
+            0 100%
+        );
+        display: block;
     }
-    to {
-        opacity: 1;
-        transform: translate(0, -50%);
+
+    .floating-survey h4 {
+        color: var(--cyber-green);
+        font-size: 1.6rem;
+        margin-bottom: 15px;
+        font-family: 'Orbitron', sans-serif;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+    }
+
+    .floating-survey h4 i {
+        color: #FFD700;
+        font-size: 2rem;
+        animation: shakeGift 2s infinite;
+    }
+
+    .floating-survey p {
+        color: #fff;
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        border-left: 2px solid var(--cyber-green);
+        padding-left: 10px;
+    }
+
+    .floating-survey .btn {
+        width: 100%;
+        background: var(--cyber-green);
+        color: #000;
+        font-weight: 600;
+        padding: 12px;
+        border: none;
+        clip-path: polygon(
+            0 0,
+            95% 0,
+            100% 30%,
+            100% 100%,
+            5% 100%,
+            0 70%
+        );
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+    }
+
+    .floating-survey .btn:hover {
+        transform: translateX(5px);
+        background: #FFD700;
+        box-shadow: -5px 0 20px rgba(255, 215, 0, 0.3);
+    }
+
+    .survey-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: transparent;
+        border: none;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .survey-close:hover {
+        color: var(--cyber-green);
+        transform: scale(1.1);
+    }
+
+    @keyframes shakeGift {
+        0%, 100% { transform: rotate(0); }
+        25% { transform: rotate(-10deg); }
+        75% { transform: rotate(10deg); }
+    }
+
+    .floating-survey {
+        animation: slideInRight 0.5s ease-out forwards;
+    }
+
+    .floating-survey.hiding {
+        animation: slideOutRight 0.3s ease-in forwards;
+    }
+
+    @keyframes slideInRight {
+        from {
+            opacity: 0;
+            transform: translate(100%, -50%);
+        }
+        to {
+            opacity: 1;
+            transform: translate(0, -50%);
+        }
+    }
+
+    @keyframes slideOutRight {
+        to {
+            opacity: 0;
+            transform: translate(100%, -50%);
+        }
     }
 }
 
-.floating-survey {
-    animation: slideInRight 0.5s ease-out forwards;
-}
-
-/* Animación de salida */
-.floating-survey.hiding {
-    animation: slideOutRight 0.3s ease-in forwards;
-}
-
-@keyframes slideOutRight {
-    to {
-        opacity: 0;
-        transform: translate(100%, -50%);
-    }
-}
-
-/* Ajustes responsivos */
+/* Estilos específicos para móvil */
 @media (max-width: 768px) {
     .floating-survey {
-        position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         width: 90%;
         max-width: 320px;
-        height: auto;
-        animation: fadeInCenter 0.5s ease-out forwards;
+        background: linear-gradient(145deg, rgba(0, 0, 0, 0.98), rgba(20, 20, 20, 0.95));
+        padding: 20px;
+        border: 2px solid var(--cyber-green);
+        border-radius: 15px;
+        box-shadow: 0 0 25px rgba(57, 255, 20, 0.2);
+        animation: fadeIn 0.3s ease-out;
+    }
+
+    .floating-survey h4 {
+        font-size: 1.2rem;
+        color: var(--cyber-green);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 12px;
+        text-align: center;
+    }
+
+    .floating-survey h4 i {
+        color: #FFD700;
+        animation: pulse 2s infinite;
+    }
+
+    .floating-survey p {
+        font-size: 0.9rem;
+        color: #fff;
+        margin-bottom: 15px;
+        line-height: 1.4;
+        text-align: center;
+        padding: 0 10px;
+    }
+
+    .floating-survey .btn {
+        background: var(--cyber-green);
+        color: #000;
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .survey-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: transparent;
+        border: none;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 1.2rem;
+        padding: 5px;
     }
 
     .floating-survey.hiding {
-        animation: fadeOutCenter 0.3s ease-in forwards;
+        animation: fadeOut 0.3s ease-in forwards;
     }
 
-    @keyframes fadeInCenter {
+    @keyframes fadeIn {
         from {
             opacity: 0;
-            transform: translate(-50%, -60%);
+            transform: translate(-50%, -40%);
         }
         to {
             opacity: 1;
@@ -1834,10 +1892,20 @@ a:focus {
         }
     }
 
-    @keyframes fadeOutCenter {
+    @keyframes fadeOut {
+        from {
+            opacity: 1;
+            transform: translate(-50%, -50%);
+        }
         to {
             opacity: 0;
-            transform: translate(-50%, -40%);
+            transform: translate(-50%, -60%);
         }
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
     }
 }
