@@ -1,3 +1,13 @@
+// Mover la función fuera del DOMContentLoaded para hacerla global
+function closeSurveyBox() {
+    const surveyBox = document.getElementById('floatingSurvey');
+    surveyBox.classList.add('hiding');
+    setTimeout(() => {
+        surveyBox.style.display = 'none';
+        surveyBox.classList.remove('hiding');
+    }, 300);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // Asegurar que la página empiece desde arriba
     window.scrollTo(0, 0);
@@ -481,6 +491,39 @@ document.addEventListener('DOMContentLoaded', function() {
             sendGAEvent('Services', 'View Service', serviceTitle);
         });
     });
+
+    // Agregar el event listener al botón de cierre
+    const closeButton = document.querySelector('.survey-close');
+    if (closeButton) {
+        closeButton.addEventListener('click', closeSurveyBox);
+    }
+
+    // Mostrar el cuadro después de 2 segundos
+    setTimeout(() => {
+        const surveyBox = document.getElementById('floatingSurvey');
+        if (surveyBox) {
+            surveyBox.style.display = 'block';
+        }
+    }, 2000);
+
+    // Ajustar el diseño para dispositivos móviles
+    function adjustMobileLayout() {
+        const isMobile = window.innerWidth <= 768;
+        const surveyBox = document.getElementById('floatingSurvey');
+        if (isMobile) {
+            surveyBox.style.width = '90%';
+            surveyBox.style.left = '50%';
+            surveyBox.style.transform = 'translateX(-50%)';
+        } else {
+            surveyBox.style.width = '320px';
+            surveyBox.style.left = '30px';
+            surveyBox.style.transform = 'none';
+        }
+    }
+
+    // Ejecutar ajustes al cargar y al cambiar el tamaño de la ventana
+    adjustMobileLayout();
+    window.addEventListener('resize', adjustMobileLayout);
 });
 
 // Mejora del rendimiento del scroll
