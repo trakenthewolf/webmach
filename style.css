@@ -1809,23 +1809,24 @@ a:focus {
 /* Ajustes responsivos */
 @media (max-width: 768px) {
     .floating-survey {
+        position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         width: 90%;
         max-width: 320px;
-        bottom: auto;
-        animation: slideInCenter 0.5s ease-out forwards;
+        height: auto;
+        animation: fadeInCenter 0.5s ease-out forwards;
     }
 
     .floating-survey.hiding {
-        animation: slideOutCenter 0.3s ease-in forwards;
+        animation: fadeOutCenter 0.3s ease-in forwards;
     }
 
-    @keyframes slideInCenter {
+    @keyframes fadeInCenter {
         from {
             opacity: 0;
-            transform: translate(-50%, 100%);
+            transform: translate(-50%, -60%);
         }
         to {
             opacity: 1;
@@ -1833,10 +1834,10 @@ a:focus {
         }
     }
 
-    @keyframes slideOutCenter {
+    @keyframes fadeOutCenter {
         to {
             opacity: 0;
-            transform: translate(-50%, 100%);
+            transform: translate(-50%, -40%);
         }
     }
 }
