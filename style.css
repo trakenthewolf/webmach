@@ -1809,34 +1809,34 @@ a:focus {
 /* Ajustes responsivos */
 @media (max-width: 768px) {
     .floating-survey {
-        right: 50%;
-        transform: translateX(50%);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         width: 90%;
         max-width: 320px;
-        bottom: 20px;
-        top: auto;
-        animation: slideInBottom 0.5s ease-out forwards;
+        bottom: auto;
+        animation: slideInCenter 0.5s ease-out forwards;
     }
 
     .floating-survey.hiding {
-        animation: slideOutBottom 0.3s ease-in forwards;
+        animation: slideOutCenter 0.3s ease-in forwards;
     }
 
-    @keyframes slideInBottom {
+    @keyframes slideInCenter {
         from {
             opacity: 0;
-            transform: translate(50%, 100%);
+            transform: translate(-50%, 100%);
         }
         to {
             opacity: 1;
-            transform: translate(50%, 0);
+            transform: translate(-50%, -50%);
         }
     }
 
-    @keyframes slideOutBottom {
+    @keyframes slideOutCenter {
         to {
             opacity: 0;
-            transform: translate(50%, 100%);
+            transform: translate(-50%, 100%);
         }
     }
 }
