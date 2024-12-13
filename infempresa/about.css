@@ -7,7 +7,7 @@
     min-height: 100vh;
     position: relative;
     overflow: hidden;
-    background: #111;
+    background: #222;
 }
 
 .about-content {
@@ -53,8 +53,8 @@
 
 /* Efectos de neón y resplandor */
 .highlight {
-    color: #39FF14;
-    text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+    color: #FF5733;
+    text-shadow: 0 0 10px rgba(255, 87, 51, 0.5);
 }
 
 /* Estilos para la sección de video */
@@ -89,7 +89,7 @@
 .mission-content h2 {
     font-size: 2.5rem;
     margin-bottom: 1.5rem;
-    color: white;
+    color: #FF5733;
 }
 
 /* Efectos hover */
@@ -142,8 +142,8 @@
 }
 
 .value-card {
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(57, 255, 20, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 87, 51, 0.5);
     border-radius: 15px;
     padding: 2rem;
     text-align: center;
@@ -162,7 +162,7 @@
 }
 
 .value-card h3 {
-    color: white;
+    color: #FF5733;
     margin-bottom: 1rem;
 }
 
@@ -202,7 +202,7 @@
 }
 
 .team-card {
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 15px;
     overflow: hidden;
     transition: transform 0.3s ease;
@@ -333,7 +333,7 @@
 }
 
 .timeline-content {
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(57, 255, 20, 0.2);
     border-radius: 15px;
     padding: 1.5rem;
