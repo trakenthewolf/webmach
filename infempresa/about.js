@@ -9,11 +9,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Array de mensajes para mostrar mientras carga
     const loadingMessages = [
-        "Inicializando sistemas...",
-        "Cargando historia empresarial...",
-        "Preparando información del equipo...", 
-        "Accediendo a valores corporativos...",
-        "CARGANDO INFORMACIÓN CORPORATIVA"
+        "Cargando innovaciones...",
+        "Preparando nuestra historia...",
+        "Conociendo a nuestro equipo...", 
+        "Accediendo a nuestros valores...",
+        "CARGANDO NUESTRA VISIÓN"
     ];
     
     let currentMessage = 0;
