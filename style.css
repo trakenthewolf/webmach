@@ -800,6 +800,56 @@ input:focus, textarea:focus {
     }
 }
 
+/* Estilos para el cuadro de encuesta */
+.floating-survey {
+    background: linear-gradient(145deg, rgba(0, 0, 0, 0.95), rgba(20, 20, 20, 0.95));
+    border-left: 4px solid var(--cyber-green);
+    padding: 25px;
+    backdrop-filter: blur(10px);
+    box-shadow: -5px 0 30px rgba(57, 255, 20, 0.2);
+    border-radius: 10px; /* Añadir bordes redondeados */
+}
+
+.floating-survey h4 {
+    color: var(--cyber-green);
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    font-family: 'Orbitron', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+}
+
+.floating-survey p {
+    color: #fff;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    border-left: 2px solid var(--cyber-green);
+    padding-left: 10px;
+}
+
+.floating-survey .btn {
+    width: 100%;
+    background: var(--cyber-green);
+    color: #000;
+    font-weight: 600;
+    padding: 12px;
+    border: none;
+    border-radius: 8px; /* Bordes redondeados para el botón */
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.floating-survey .btn:hover {
+    transform: translateX(5px);
+    background: #FFD700; /* Color dorado al pasar el mouse */
+    box-shadow: -5px 0 20px rgba(255, 215, 0, 0.3);
+}
+
 /* Animación suave global */
 * {
     transition: all 0.3s ease;
