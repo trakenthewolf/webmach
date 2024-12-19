@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
             'nav-contact': 'Contacto',
             'hero-title': 'Code Mach',
             'hero-subtitle': 'Seguridad/Software',
-            'hero-description': 'Brindamos soluciones de software a medida 💻, seguridad informática 🔒, automatización de procesos ⚙️ y soporte técnico 🛠️ para llevar tu negocio al siguiente nivel 🚀.',
+            'hero-description': 'Brindamos soluciones de software a medida 💻, seguridad informática 🔒, automatización de procesos ��️ y soporte técnico 🛠️ para llevar tu negocio al siguiente nivel 🚀.',
             'about-title': 'Sobre la empresa',
             'about-subtitle': '¡Desarrolladora Web Extraordinaria!',
             'about-description': 'Soy una desarrolladora frontend dedicada a crear sitios web visualmente atractivos y fáciles de usar. Mi experiencia incluye HTML, CSS y JavaScript, y me apasiona mantenerme actualizada sobre las últimas tendencias en desarrollo web.',
@@ -524,6 +524,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Ejecutar ajustes al cargar y al cambiar el tamaño de la ventana
     adjustMobileLayout();
     window.addEventListener('resize', adjustMobileLayout);
+
+    // Rastrear clic en el botón de comenzar
+    const startButton = document.querySelector('.floating-survey .btn');
+    if (startButton) {
+        startButton.addEventListener('click', function() {
+            sendGAEvent('Survey', 'Start Form', 'User started the form');
+        });
+    }
 });
 
 // Mejora del rendimiento del scroll
