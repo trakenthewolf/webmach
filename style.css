@@ -1760,14 +1760,14 @@ a:focus {
     }
 
     .floating-survey h4 {
-        color: var(--cyber-green);
+        color: #FFF;
         font-size: 1.6rem;
         margin-bottom: 15px;
         font-family: 'Orbitron', sans-serif;
         display: flex;
         align-items: center;
         gap: 10px;
-        text-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+        text-shadow: 0 0 10px rgb(0, 100, 255);
     }
 
     .floating-survey h4 i {
