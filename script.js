@@ -550,3 +550,31 @@ window.addEventListener('scroll', function() {
 window.onbeforeunload = function() {
     window.scrollTo(0, 0);
 };
+// Configuración de animaciones al hacer scroll
+function handleScrollAnimations() {
+    const elements = document.querySelectorAll('.animate-on-scroll');
+
+    elements.forEach((element) => {
+        const rect = element.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+
+        if (rect.top <= windowHeight * 0.85 && rect.bottom >= 0) {
+            element.classList.add('animate');
+        } else {
+            element.classList.remove('animate');
+        }
+    });
+}
+
+// Optimizar el evento scroll
+let isScrolling;
+window.addEventListener('scroll', () => {
+    window.clearTimeout(isScrolling);
+
+    isScrolling = setTimeout(() => {
+        handleScrollAnimations();
+    }, 50); // Retardo para mejorar el rendimiento
+});
+
+// Inicializar animaciones al cargar la página
+window.addEventListener('DOMContentLoaded', handleScrollAnimations);
