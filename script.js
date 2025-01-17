@@ -334,27 +334,16 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.service-card .btn-primary').forEach(btn => {
         const serviceTitle = btn.closest('.service-card').querySelector('.service-title').textContent.trim();
         
-        if (btn.textContent.trim() !== 'Próximamente') {
-            btn.setAttribute('data-bs-toggle', 'modal');
-            
-            switch(serviceTitle) {
-                case 'Desarrollo Web Estático':
-                    btn.setAttribute('data-bs-target', '#servicioWeb');
-                    break;
-                case 'Auditorías de Seguridad':
-                    btn.setAttribute('data-bs-target', '#servicioAuditoria');
-                    break;
-                case 'Consultoría Empresarial':
-                    btn.setAttribute('data-bs-target', '#servicioConsultoria');
-                    break;
-                case 'Automatización de Procesos':
-                    btn.setAttribute('data-bs-target', '#servicioAutomatizacion');
-                    break;
-            }
-        } else {
-            // Para servicios próximamente, deshabilitamos el botón
-            btn.classList.add('disabled');
-            btn.style.opacity = '0.7';
+        switch(serviceTitle) {
+            case 'Desarrollo Web':
+                btn.setAttribute('data-bs-target', '#servicioWebModal');
+                break;
+            case 'Seguridad Informática':
+                btn.setAttribute('data-bs-target', '#servicioSeguridadModal');
+                break;
+            case 'Consultoría':
+                btn.setAttribute('data-bs-target', '#servicioConsultoriaModal');
+                break;
         }
     });
 
