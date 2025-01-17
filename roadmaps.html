@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roadmaps de Ciberseguridad - Code Mach Enterprise</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body class="cyber-theme">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Code Mach Enterprise</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="roadmaps.html">Roadmaps</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="cyber-header text-center py-5">
+        <div class="container">
+            <h1 class="cyber-title">Roadmaps de Ciberseguridad</h1>
+            <p class="cyber-subtitle">Elige tu camino en el mundo de la ciberseguridad</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row g-4">
+            <!-- Red Team Path -->
+            <div class="col-md-6 col-lg-4">
+                <div class="career-card cyber-card h-100" id="redteam-card">
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="bi bi-shield-slash"></i>
+                        </div>
+                        <h3>Red Team</h3>
+                        <p>Equipo ofensivo que simula ataques reales.</p>
+                        <ul class="career-features">
+                            <li>Simulación de APTs</li>
+                            <li>Operaciones Ofensivas</li>
+                            <li>Evaluación de Defensas</li>
+                        </ul>
+                        <div class="badges mb-3">
+                            <span class="badge bg-danger">Avanzado</span>
+                            <span class="badge bg-info">CRTO, OSEP</span>
+                        </div>
+                        <button onclick="showRedTeamRoadmap()" class="btn btn-primary w-100">Ver Roadmap</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blue Team Path -->
+            <div class="col-md-6 col-lg-4">
+                <div class="career-card cyber-card h-100" id="blueteam-card">
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="bi bi-shield-fill-check"></i>
+                        </div>
+                        <h3>Blue Team</h3>
+                        <p>Equipo defensivo que protege la infraestructura.</p>
+                        <ul class="career-features">
+                            <li>Defensa de Sistemas</li>
+                            <li>Detección de Amenazas</li>
+                            <li>Hardening de Infraestructura</li>
+                        </ul>
+                        <div class="badges mb-3">
+                            <span class="badge bg-primary">Defensivo</span>
+                            <span class="badge bg-info">GCDA, GCED</span>
+                        </div>
+                        <button onclick="showBlueTeamRoadmap()" class="btn btn-primary w-100">Ver Roadmap</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pentester Path -->
+            <div class="col-md-6 col-lg-4">
+                <div class="career-card cyber-card h-100">
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="bi bi-bug"></i>
+                        </div>
+                        <h3>Pentester</h3>
+                        <p>Profesional en pruebas de penetración.</p>
+                        <ul class="career-features">
+                            <li>Auditorías de Seguridad</li>
+                            <li>Bug Bounty Hunter</li>
+                            <li>Consultor de Seguridad</li>
+                        </ul>
+                        <div class="badges mb-3">
+                            <span class="badge bg-success">Alta Demanda</span>
+                            <span class="badge bg-info">OSCP, CEH</span>
+                        </div>
+                        <button onclick="showPentesterRoadmap()" class="btn btn-primary w-100">Ver Roadmap</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SOC Analyst Path -->
+            <div class="col-md-6 col-lg-4">
+                <div class="career-card cyber-card h-100">
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h3>SOC Analyst</h3>
+                        <p>Analista de Centro de Operaciones de Seguridad.</p>
+                        <ul class="career-features">
+                            <li>Monitoreo de Seguridad</li>
+                            <li>Análisis de Incidentes</li>
+                            <li>Respuesta a Amenazas</li>
+                        </ul>
+                        <div class="badges mb-3">
+                            <span class="badge bg-primary">Analítico</span>
+                            <span class="badge bg-info">Security+, GSOC</span>
+                        </div>
+                        <button onclick="showSOCAnalystRoadmap()" class="btn btn-primary w-100">Ver Roadmap</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Incident Response Path -->
+            <div class="col-md-6 col-lg-4">
+                <div class="career-card cyber-card h-100" id="incidentresponder-card">
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="bi bi-shield-fill-exclamation"></i>
+                        </div>
+                        <h3>Incident Responder</h3>
+                        <p>Especialista en respuesta y gestión de incidentes de seguridad.</p>
+                        <ul class="career-features">
+                            <li>Análisis Forense Digital</li>
+                            <li>Gestión de Crisis</li>
+                            <li>Threat Hunting</li>
+                            <li>Recuperación de Sistemas</li>
+                        </ul>
+                        <div class="badges mb-3">
+                            <span class="badge bg-warning">Experiencia Media</span>
+                            <span class="badge bg-info">GCIH, GCFA</span>
+                            <span class="badge bg-success">Alta Demanda</span>
+                        </div>
+                        <button onclick="showIncidentResponseRoadmap()" class="btn btn-primary w-100">Ver Roadmap</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Malware Analyst Path -->
+            <div class="col-md-6 col-lg-4">
+                <div class="career-card cyber-card h-100">
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="bi bi-bug-fill"></i>
+                        </div>
+                        <h3>Malware Analyst</h3>
+                        <p>Especialista en análisis de malware.</p>
+                        <ul class="career-features">
+                            <li>Análisis de Código Malicioso</li>
+                            <li>Desarrollo de Contramedidas</li>
+                        </ul>
+                        <div class="badges mb-3">
+                            <span class="badge bg-danger">Altamente Técnico</span>
+                            <span class="badge bg-info">GREM, GMOB</span>
+                        </div>
+                        <button onclick="showMalwareAnalystRoadmap()" class="btn btn-primary w-100">Ver Roadmap</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cloud Security Path -->
+            <div class="col-md-6 col-lg-4">
+                <div class="career-card cyber-card h-100">
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="bi bi-cloud-check"></i>
+                        </div>
+                        <h3>Cloud Security</h3>
+                        <p>Especialista en seguridad cloud.</p>
+                        <ul class="career-features">
+                            <li>Arquitectura Cloud Segura</li>
+                            <li>DevSecOps</li>
+                            <li>Compliance Cloud</li>
+                        </ul>
+                        <div class="badges mb-3">
+                            <span class="badge bg-success">Alta Demanda</span>
+                            <span class="badge bg-info">CCSP, AWS Security</span>
+                        </div>
+                        <button onclick="showCloudSecurityRoadmap()" class="btn btn-primary w-100">Ver Roadmap</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Engineer Path -->
+            <div class="col-md-6 col-lg-4">
+                <div class="career-card cyber-card h-100">
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="bi bi-gear-fill"></i>
+                        </div>
+                        <h3>Security Engineer</h3>
+                        <p>Ingeniero de seguridad de sistemas.</p>
+                        <ul class="career-features">
+                            <li>Diseño de Seguridad</li>
+                            <li>Implementación de Controles</li>
+                            <li>Automatización de Seguridad</li>
+                        </ul>
+                        <div class="badges mb-3">
+                            <span class="badge bg-primary">Técnico</span>
+                            <span class="badge bg-info">CISSP, GIAC</span>
+                        </div>
+                        <button onclick="showSecurityEngineerRoadmap()" class="btn btn-primary w-100">Ver Roadmap</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Application Security Path -->
+            <div class="col-md-6 col-lg-4">
+                <div class="career-card cyber-card h-100">
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="bi bi-code-square"></i>
+                        </div>
+                        <h3>AppSec Engineer</h3>
+                        <p>Ingeniero de seguridad en aplicaciones.</p>
+                        <ul class="career-features">
+                            <li>Secure Coding</li>
+                            <li>SAST/DAST</li>
+                            <li>Security Champions</li>
+                        </ul>
+                        <div class="badges mb-3">
+                            <span class="badge bg-success">DevSecOps</span>
+                            <span class="badge bg-info">CSSLP, GWEB</span>
+                        </div>
+                        <button onclick="showAppSecRoadmap()" class="btn btn-primary w-100">Ver Roadmap</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script src="js/redteam.js"></script>
+    <script src="js/blueteam.js"></script>
+    <script src="js/pentester.js"></script>
+    <script src="js/socanalyst.js"></script>
+    <script src="js/incidentresponder.js"></script>
+    <script src="js/malwareanalyst.js"></script>
+    <script src="js/cloudsecurity.js"></script>
+    <script src="js/securityengineer.js"></script>
+    <script src="js/appsec.js"></script>
+</body>
+</html> 
