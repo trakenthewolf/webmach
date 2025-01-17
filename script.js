@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
             'nav-contact': 'Contacto',
             'hero-title': 'Code Mach',
             'hero-subtitle': 'Seguridad/Software',
-            'hero-description': 'Brindamos soluciones de software a medida 💻, seguridad informática 🔒, automatización de procesos ��️ y soporte técnico 🛠️ para llevar tu negocio al siguiente nivel 🚀.',
+            'hero-description': 'Brindamos soluciones de software a medida 💻, seguridad informática 🔒, automatización de procesos ⚙️ y soporte técnico 🛠️ para llevar tu negocio al siguiente nivel 🚀.',
             'about-title': 'Sobre la empresa',
             'about-subtitle': '¡Desarrolladora Web Extraordinaria!',
             'about-description': 'Soy una desarrolladora frontend dedicada a crear sitios web visualmente atractivos y fáciles de usar. Mi experiencia incluye HTML, CSS y JavaScript, y me apasiona mantenerme actualizada sobre las últimas tendencias en desarrollo web.',
@@ -532,7 +532,73 @@ document.addEventListener('DOMContentLoaded', function() {
             sendGAEvent('Survey', 'Start Form', 'User started the form');
         });
     }
+
+    // Mostrar el modal de cursos después del splash screen
+    setTimeout(() => {
+        showCursosRecomendados();
+    }, 3500); // 3.5 segundos después de cargar (después del splash screen)
 });
+
+function showCursosRecomendados() {
+    const modalHTML = `
+        <div class="modal fade" id="cursosRecomendadosModal">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content cyber-modal">
+                    <div class="modal-header">
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-mortarboard-fill fs-3 me-2 text-neon"></i>
+                            <h5 class="modal-title mb-0">¡Los Mejores Cursos de Ciberseguridad!</h5>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="cursos-grid">
+                            <!-- Hack4u -->
+                            <div class="curso-card">
+                                <img src="fotos,videos/savitar.jpg" alt="Hack4u" class="curso-imagen">
+                                <div class="curso-content">
+                                    <h3>Hack4u Academy</h3>
+                                    <p>La academia #1 de hacking en español. Laboratorios prácticos y contenido actualizado.</p>
+                                    <a href="https://hack4u.io/" class="btn-curso" target="_blank">
+                                        Explorar Academia
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Contando Bits -->
+                            <div class="curso-card">
+                                <img src="fotos,videos/bitacademia.jpg" alt="Contando Bits" class="curso-imagen">
+                                <div class="curso-content">
+                                    <h3>Contando Bits</h3>
+                                    <p>Cursos especializados en hacking ético y ciberseguridad desde cero.</p>
+                                    <a href="https://www.contandobits.com/cursos/" class="btn-curso" target="_blank">
+                                        Ver Cursos
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Securiters -->
+                            <div class="curso-card">
+                                <img src="fotos,videos/securite.jpg" alt="Securiters" class="curso-imagen">
+                                <div class="curso-content">
+                                    <h3>Securiters</h3>
+                                    <p>Formación práctica en auditoría web y ciberseguridad ofensiva.</p>
+                                    <a href="https://securiters.com/" class="btn-curso" target="_blank">
+                                        Descubrir Más
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    const modal = new bootstrap.Modal(document.getElementById('cursosRecomendadosModal'));
+    modal.show();
+}
 
 // Mejora del rendimiento del scroll
 let ticking = false;
@@ -578,3 +644,466 @@ window.addEventListener('scroll', () => {
 
 // Inicializar animaciones al cargar la página
 window.addEventListener('DOMContentLoaded', handleScrollAnimations);
+
+// Agregar después de las funciones existentes
+function startDiagnostic(type) {
+    // Ocultar el modal de selección
+    const selectModal = document.getElementById('diagnosticoModal');
+    const bsSelectModal = bootstrap.Modal.getInstance(selectModal);
+    bsSelectModal.hide();
+
+    // Mostrar el modal de preguntas
+    setTimeout(() => {
+        showQuestionModal(type);
+    }, 500);
+}
+
+function showQuestionModal(type) {
+    const modalHTML = `
+    <div class="modal fade" id="questionModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content cyber-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title">${type === 'user' ? 'Diagnóstico Personal' : 'Diagnóstico Empresarial'}</h5>
+                    <div class="progress-bar-container">
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div id="question-container">
+                        <!-- Las preguntas se insertarán aquí -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>`;
+
+    // Agregar el modal al DOM
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+    // Inicializar y mostrar el modal
+    const questionModal = new bootstrap.Modal(document.getElementById('questionModal'));
+    questionModal.show();
+
+    // Iniciar el diagnóstico
+    startQuestions(type);
+}
+
+function startQuestions(type) {
+    const questions = type === 'user' ? userQuestions : businessQuestions;
+    let currentQuestion = 0;
+    let score = 0;
+
+    function showQuestion() {
+        const questionContainer = document.getElementById('question-container');
+        const question = questions[currentQuestion];
+        
+        questionContainer.innerHTML = `
+            <h4 class="mb-4">${question.question}</h4>
+            <div class="options-grid">
+                ${question.options.map((option, index) => `
+                    <div class="option-card" onclick="selectAnswer(${index}, ${option.score})">
+                        <div class="option-content">
+                            <p>${option.text}</p>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+
+        // Actualizar barra de progreso
+        const progressBar = document.querySelector('.progress-bar');
+        progressBar.style.width = `${(currentQuestion + 1) * 100 / questions.length}%`;
+    }
+
+    window.selectAnswer = function(index, optionScore) {
+        score += optionScore;
+        currentQuestion++;
+
+        if (currentQuestion < questions.length) {
+            showQuestion();
+        } else {
+            showResults(score, questions.length * 10);
+        }
+    };
+
+    showQuestion();
+}
+
+function showResults(score, maxScore) {
+    const percentage = (score / maxScore) * 100;
+    const resultLevel = getResultLevel(percentage);
+    
+    // Determinar el color según el porcentaje
+    let scoreColor;
+    if (percentage >= 70) {
+        scoreColor = '#39FF14'; // Verde neón para buenos resultados
+    } else if (percentage >= 50) {
+        scoreColor = '#FFA500'; // Naranja para resultados medios
+    } else {
+        scoreColor = '#FF0000'; // Rojo para resultados bajos
+    }
+    
+    const questionContainer = document.getElementById('question-container');
+    questionContainer.innerHTML = `
+        <div class="results-container text-center">
+            <h3 class="mb-4">Resultados del Diagnóstico</h3>
+            <div class="score-circle mb-4" style="border-color: ${scoreColor}; box-shadow: 0 0 20px ${scoreColor}40;">
+                <span class="score-number" style="color: ${scoreColor};">${Math.round(percentage)}%</span>
+            </div>
+            <h4 class="mb-3" style="color: ${scoreColor};">${resultLevel.title}</h4>
+            <p class="mb-4">${resultLevel.description}</p>
+            <div class="button-group">
+                <button class="btn btn-primary me-2" onclick="downloadResults(${percentage}, '${resultLevel.title}', '${resultLevel.description}')">
+                    <i class="bi bi-download me-2"></i>Descargar Resultados
+                </button>
+                <button class="btn btn-secondary" onclick="closeQuestionModal()">
+                    <i class="bi bi-x-circle me-2"></i>Cerrar
+                </button>
+            </div>
+        </div>
+    `;
+
+    // Actualizar la animación del glow según el color
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes glow-${Math.round(percentage)} {
+            from {
+                box-shadow: 0 0 10px ${scoreColor}40;
+            }
+            to {
+                box-shadow: 0 0 20px ${scoreColor}80;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+    
+    const scoreCircle = questionContainer.querySelector('.score-circle');
+    scoreCircle.style.animation = `glow-${Math.round(percentage)} 2s infinite alternate`;
+}
+
+function getResultLevel(percentage) {
+    if (percentage >= 90) {
+        return {
+            title: "Nivel Excelente",
+            description: "¡Felicitaciones! Tu nivel de seguridad es excepcional. Continúa manteniendo estas buenas prácticas."
+        };
+    } else if (percentage >= 70) {
+        return {
+            title: "Nivel Bueno",
+            description: "Tienes buenas prácticas de seguridad, pero hay espacio para mejorar algunos aspectos."
+        };
+    } else if (percentage >= 50) {
+        return {
+            title: "Nivel Medio",
+            description: "Tu seguridad necesita atención. Considera implementar medidas adicionales para mejorar tu protección."
+        };
+    } else {
+        return {
+            title: "Nivel Crítico",
+            description: "¡Atención! Tu nivel de seguridad es muy bajo y requiere atención inmediata. Te recomendamos tomar medidas urgentes."
+        };
+    }
+}
+
+// Variables globales para el diagnóstico
+let currentQuestion = 0;
+let userAnswers = [];
+let questions = [];
+let diagnosticType = '';
+
+// Preguntas para usuarios individuales
+const userQuestions = [
+    {
+        question: "¿Qué tipo de contraseñas utilizas habitualmente?",
+        options: [
+            { text: "Contraseñas únicas, largas y complejas para cada servicio", score: 10 },
+            { text: "Contraseñas diferentes pero simples", score: 6 },
+            { text: "La misma contraseña para varios servicios", score: 3 },
+            { text: "Contraseñas muy básicas (123456, fecha nacimiento)", score: 0 }
+        ]
+    },
+    {
+        question: "¿Cómo proteges tus dispositivos móviles?",
+        options: [
+            { text: "Biometría + PIN complejo + cifrado de datos", score: 10 },
+            { text: "PIN o patrón complejo", score: 7 },
+            { text: "PIN simple o patrón básico", score: 4 },
+            { text: "Sin protección", score: 0 }
+        ]
+    },
+    {
+        question: "¿Qué medidas de seguridad usas en tus redes WiFi?",
+        options: [
+            { text: "WPA3 + contraseña fuerte + red de invitados separada", score: 10 },
+            { text: "WPA2 + contraseña moderada", score: 7 },
+            { text: "Configuración básica del router", score: 4 },
+            { text: "Configuración predeterminada o red abierta", score: 0 }
+        ]
+    },
+    {
+        question: "¿Cómo manejas las copias de seguridad?",
+        options: [
+            { text: "Backups automáticos cifrados en múltiples ubicaciones", score: 10 },
+            { text: "Backups regulares en disco externo", score: 7 },
+            { text: "Backups ocasionales", score: 4 },
+            { text: "No realizo copias de seguridad", score: 0 }
+        ]
+    },
+    {
+        question: "¿Qué medidas tomas para la navegación web?",
+        options: [
+            { text: "VPN + navegación privada + bloqueador de anuncios", score: 10 },
+            { text: "Navegación privada y antivirus", score: 7 },
+            { text: "Solo antivirus básico", score: 4 },
+            { text: "Ninguna medida especial", score: 0 }
+        ]
+    },
+    {
+        question: "¿Cómo verificas la autenticidad de los correos?",
+        options: [
+            { text: "Verifico remitentes, enlaces y nunca abro adjuntos sospechosos", score: 10 },
+            { text: "Reviso el remitente y evito enlaces sospechosos", score: 7 },
+            { text: "Solo abro correos de conocidos", score: 4 },
+            { text: "Abro todos los correos sin verificar", score: 0 }
+        ]
+    },
+    {
+        question: "¿Cómo proteges tus redes sociales?",
+        options: [
+            { text: "2FA + contraseñas únicas + revisión periódica de privacidad", score: 10 },
+            { text: "2FA y contraseñas seguras", score: 7 },
+            { text: "Solo contraseñas básicas", score: 4 },
+            { text: "Sin medidas especiales", score: 0 }
+        ]
+    },
+    {
+        question: "¿Qué medidas tomas con tus dispositivos IoT?",
+        options: [
+            { text: "Red separada + actualizaciones automáticas + contraseñas únicas", score: 10 },
+            { text: "Actualizaciones regulares y contraseñas personalizadas", score: 7 },
+            { text: "Configuración básica", score: 4 },
+            { text: "Configuración predeterminada", score: 0 }
+        ]
+    },
+    {
+        question: "¿Cómo manejas tus documentos sensibles?",
+        options: [
+            { text: "Cifrado + almacenamiento seguro + destrucción segura", score: 10 },
+            { text: "Almacenamiento protegido con contraseña", score: 7 },
+            { text: "Carpetas privadas básicas", score: 4 },
+            { text: "Sin protección especial", score: 0 }
+        ]
+    }
+];
+
+// Preguntas para empresas
+const businessQuestions = [
+    {
+        question: "¿Qué políticas de seguridad implementa su empresa?",
+        options: [
+            { text: "Políticas completas documentadas, actualizadas y auditadas", score: 10 },
+            { text: "Políticas básicas documentadas", score: 7 },
+            { text: "Políticas informales no documentadas", score: 4 },
+            { text: "Sin políticas establecidas", score: 0 }
+        ]
+    },
+    {
+        question: "¿Cómo gestiona los accesos de usuarios?",
+        options: [
+            { text: "2FA + roles definidos + revisión periódica de accesos", score: 10 },
+            { text: "Usuarios únicos y contraseñas fuertes", score: 7 },
+            { text: "Usuarios compartidos con contraseñas", score: 3 },
+            { text: "Sin control de accesos", score: 0 }
+        ]
+    },
+    {
+        question: "¿Qué medidas de seguridad física implementa?",
+        options: [
+            { text: "Control biométrico + CCTV + registro de accesos", score: 10 },
+            { text: "Control de acceso con tarjetas y CCTV", score: 7 },
+            { text: "Cerraduras básicas y algunas cámaras", score: 4 },
+            { text: "Seguridad física mínima", score: 0 }
+        ]
+    },
+    {
+        question: "¿Cómo maneja la seguridad de la red empresarial?",
+        options: [
+            { text: "Firewall + IDS/IPS + Segmentación + Monitoreo 24/7", score: 10 },
+            { text: "Firewall y antivirus empresarial", score: 7 },
+            { text: "Protección básica de red", score: 4 },
+            { text: "Sin protecciones especiales", score: 0 }
+        ]
+    },
+    {
+        question: "¿Qué protocolo sigue para copias de seguridad?",
+        options: [
+            { text: "Backup automático cifrado 3-2-1 con pruebas de recuperación", score: 10 },
+            { text: "Backups diarios en diferentes ubicaciones", score: 7 },
+            { text: "Backups ocasionales locales", score: 4 },
+            { text: "Sin política de backups", score: 0 }
+        ]
+    },
+    {
+        question: "¿Cómo maneja la capacitación en seguridad?",
+        options: [
+            { text: "Programa continuo + simulacros + evaluaciones", score: 10 },
+            { text: "Capacitaciones periódicas básicas", score: 7 },
+            { text: "Capacitaciones ocasionales", score: 4 },
+            { text: "Sin capacitación en seguridad", score: 0 }
+        ]
+    },
+    {
+        question: "¿Cómo gestiona la seguridad en el desarrollo de software?",
+        options: [
+            { text: "DevSecOps + pruebas automáticas + auditorías regulares", score: 10 },
+            { text: "Revisiones de código y pruebas básicas", score: 7 },
+            { text: "Pruebas ocasionales", score: 4 },
+            { text: "Sin proceso formal", score: 0 }
+        ]
+    },
+    {
+        question: "¿Qué plan de continuidad de negocio tiene implementado?",
+        options: [
+            { text: "Plan completo + pruebas regulares + actualizaciones", score: 10 },
+            { text: "Plan básico documentado", score: 7 },
+            { text: "Procedimientos informales", score: 4 },
+            { text: "Sin plan establecido", score: 0 }
+        ]
+    },
+    {
+        question: "¿Cómo maneja la seguridad con proveedores externos?",
+        options: [
+            { text: "Evaluación rigurosa + monitoreo continuo + contratos detallados", score: 10 },
+            { text: "Evaluación básica y contratos estándar", score: 7 },
+            { text: "Revisión informal", score: 4 },
+            { text: "Sin evaluación de seguridad", score: 0 }
+        ]
+    }
+];
+
+// Función para iniciar el diagnóstico
+function startDetailedDiagnostic(type) {
+    diagnosticType = type;
+    currentQuestion = 0;
+    userAnswers = [];
+    questions = type === 'user' ? userQuestions : businessQuestions;
+    
+    const diagnosticModal = bootstrap.Modal.getInstance(document.getElementById('diagnosticoModal'));
+    if (diagnosticModal) {
+        diagnosticModal.hide();
+    }
+    
+    showDiagnosticQuestion();
+}
+
+// Función para mostrar la pregunta actual
+function showDiagnosticQuestion() {
+    const modalContent = `
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content cyber-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title">Pregunta ${currentQuestion + 1} de ${questions.length}</h5>
+                    <div class="progress w-100 mt-2">
+                        <div class="progress-bar" style="width: ${(currentQuestion + 1) * 100 / questions.length}%"></div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <h6 class="question-text mb-4">${questions[currentQuestion].question}</h6>
+                    <div class="options-grid">
+                        ${questions[currentQuestion].options.map((option, index) => `
+                            <div class="option-card" onclick="selectAnswer(${index})">
+                                <div class="option-content">
+                                    ${option.text}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // ... resto del código para mostrar el modal ...
+}
+
+// Agregar función para descargar resultados
+function downloadResults(percentage, title, description) {
+    const date = new Date().toLocaleDateString();
+    const content = `
+Diagnóstico de Seguridad - Code Mach Enterprise
+Fecha: ${date}
+
+Resultado: ${Math.round(percentage)}%
+Nivel: ${title}
+
+Evaluación:
+${description}
+
+Recomendaciones:
+- Mantener actualizadas todas las medidas de seguridad
+- Realizar evaluaciones periódicas
+- Implementar las mejoras sugeridas
+- Contactar con profesionales para áreas críticas
+
+Para más información y asesoramiento profesional:
+Contacte con Code Mach Enterprise
+    `;
+
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `diagnostico-seguridad-${date}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+}
+
+// Agregar función para cerrar el modal
+function closeModal() {
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach(modal => {
+        const bsModal = bootstrap.Modal.getInstance(modal);
+        if (bsModal) {
+            bsModal.hide();
+        }
+        // Limpiar el backdrop y restaurar el scroll
+        setTimeout(() => {
+            const backdrop = document.querySelector('.modal-backdrop');
+            if (backdrop) {
+                backdrop.remove();
+            }
+            document.body.classList.remove('modal-open');
+            document.body.style.overflow = '';
+            document.body.style.paddingRight = '';
+        }, 300);
+    });
+}
+
+// Agregar nueva función para cerrar específicamente el modal de preguntas
+function closeQuestionModal() {
+    const questionModal = document.getElementById('questionModal');
+    if (questionModal) {
+        const bsModal = bootstrap.Modal.getInstance(questionModal);
+        if (bsModal) {
+            bsModal.hide();
+        }
+        // Limpiar el modal y el backdrop después de cerrarlo
+        setTimeout(() => {
+            questionModal.remove();
+            // Remover el backdrop manualmente
+            const backdrop = document.querySelector('.modal-backdrop');
+            if (backdrop) {
+                backdrop.remove();
+            }
+            // Restaurar el scroll del body
+            document.body.classList.remove('modal-open');
+            document.body.style.overflow = '';
+            document.body.style.paddingRight = '';
+        }, 300);
+    }
+}
