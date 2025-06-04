@@ -99,7 +99,7 @@
         <div class="col-md-6 text-center animate-on-scroll fade-in-right">
           <div class="image-container">
             <div class="image-circle neural-item">
-              <img src="fotos,videos/logo1.png" alt="Profile Picture" class="profile-img">
+              <img src="fotos,videos/logo1.webp" alt="Profile Picture" class="profile-img">
             </div>
           </div>
         </div>
@@ -130,7 +130,7 @@
         <div class="col-md-6 text-center">
           <div class="about-image-container">
             <div class="about-image-circle">
-              <img src="fotos,videos/logo2.png" alt="Profile Picture" class="profile-img-a">
+              <img src="fotos,videos/logo2.webp" alt="Profile Picture" class="profile-img-a">
             </div>
           </div>
         </div>
@@ -150,49 +150,47 @@
 
 
   <!-- My Services Section -->
-<section id="servicios" class="my-services py-5">
+<section id="servicios" class="my-services py-5 bg-light">
     <div class="container">
-        <h2 class="text-center mb-5">Nuestros <span class="highlight">Servicios</span></h2>
-        <div class="row">
-            <!-- Servicio 1: Ayuda en Software y Hardware -->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="service-card text-center p-4">
-                    <div class="service-icon">
+        <h2 class="text-center mb-5 text-primary">Nuestros <span class="highlight text-accent">Servicios</span></h2>
+        <div class="row g-4">
+            <!-- Servicio 1 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="service-card-modern shadow-sm h-100">
+                    <div class="service-icon-modern bg-primary text-white mb-3">
                         <i class="bi bi-laptop"></i>
                     </div>
-                    <h3 class="service-title">Soporte Técnico Integral</h3>
-                    <p class="service-description">
+                    <h3 class="service-title-modern">Soporte Técnico Integral</h3>
+                    <p class="service-description-modern">
                         Soluciones completas en software y hardware para empresas y usuarios. Diagnóstico, reparación, optimización y actualización de equipos.
                     </p>
-                    <button class="btn btn-primary btn-shadow" data-bs-toggle="modal" data-bs-target="#servicioSoftwareHardwareModal">Explorar Servicio</button>
+                    <button class="btn btn-outline-primary w-100 mt-auto" data-bs-toggle="modal" data-bs-target="#servicioSoftwareHardwareModal">Explorar Servicio</button>
                 </div>
             </div>
-
-            <!-- Servicio 2: Seguridad Informática -->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="service-card text-center p-4">
-                    <div class="service-icon">
+            <!-- Servicio 2 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="service-card-modern shadow-sm h-100">
+                    <div class="service-icon-modern bg-success text-white mb-3">
                         <i class="bi bi-shield-lock"></i>
                     </div>
-                    <h3 class="service-title">Seguridad Informática</h3>
-                    <p class="service-description">
+                    <h3 class="service-title-modern">Seguridad Informática</h3>
+                    <p class="service-description-modern">
                         Protección avanzada, auditoría de sistemas, controles parentales y asesoría en seguridad digital para empresas y familias.
                     </p>
-                    <button class="btn btn-primary btn-shadow" data-bs-toggle="modal" data-bs-target="#servicioSeguridadModal">Explorar Servicio</button>
+                    <button class="btn btn-outline-primary w-100 mt-auto" data-bs-toggle="modal" data-bs-target="#servicioSeguridadModal">Explorar Servicio</button>
                 </div>
             </div>
-
-            <!-- Servicio 3: Consultoría -->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="service-card text-center p-4">
-                    <div class="service-icon">
+            <!-- Servicio 3 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="service-card-modern shadow-sm h-100">
+                    <div class="service-icon-modern bg-warning text-white mb-3">
                         <i class="bi bi-graph-up"></i>
                     </div>
-                    <h3 class="service-title">Consultoría Empresarial</h3>
-                    <p class="service-description">
+                    <h3 class="service-title-modern">Consultoría Empresarial</h3>
+                    <p class="service-description-modern">
                         Optimización, transformación digital, capacitación y mejora continua para potenciar tu negocio.
                     </p>
-                    <button class="btn btn-primary btn-shadow" data-bs-toggle="modal" data-bs-target="#servicioConsultoriaModal">Explorar Servicio</button>
+                    <button class="btn btn-outline-primary w-100 mt-auto" data-bs-toggle="modal" data-bs-target="#servicioConsultoriaModal">Explorar Servicio</button>
                 </div>
             </div>
         </div>
@@ -202,55 +200,39 @@
 <!-- Modales mejorados para cada servicio -->
 <div class="modal fade" id="servicioSoftwareHardwareModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl">
-        <div class="modal-content service-modal">
-            <div class="modal-header">
-                <h5 class="modal-title serif-font">Soporte Técnico Integral</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content service-modal glass-dark p-0">
+            <div class="modal-header border-0 pb-0" style="border-radius: 20px 20px 0 0;">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="service-icon-modern">
+                        <i class="bi bi-laptop"></i>
+                    </div>
+                    <h5 class="modal-title serif-font mb-0">Soporte Técnico Integral</h5>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
-            <div class="modal-body">
-                <div class="row">
+            <div class="modal-body pt-0 pb-4 px-4">
+                <div class="row g-4 align-items-center">
                     <div class="col-md-6">
-                        <div class="service-schema">
-                            <div class="schema-section">
-                                <h6 class="serif-font">Software</h6>
-                                <ul class="feature-list">
-                                    <li><i class="bi bi-check-circle"></i> Instalación y configuración de sistemas operativos</li>
-                                    <li><i class="bi bi-check-circle"></i> Actualización y mantenimiento de software</li>
-                                    <li><i class="bi bi-check-circle"></i> Respaldo y recuperación de datos</li>
-                                    <li><i class="bi bi-check-circle"></i> Eliminación de malware y virus</li>
-                                </ul>
-                            </div>
-                            <div class="schema-section">
-                                <h6 class="serif-font">Hardware</h6>
-                                <ul class="feature-list">
-                                    <li><i class="bi bi-check-circle"></i> Diagnóstico y reparación de equipos</li>
-                                    <li><i class="bi bi-check-circle"></i> Mantenimiento preventivo</li>
-                                    <li><i class="bi bi-check-circle"></i> Actualización de componentes</li>
-                                    <li><i class="bi bi-check-circle"></i> Configuración de redes</li>
-                                </ul>
-                            </div>
-                        </div>
+
+                        <ul class="feature-list mt-3">
+                            <li><i class="bi bi-cpu"></i> Reparación y optimización de equipos</li>
+                            <li><i class="bi bi-hdd"></i> Respaldo y recuperación de datos</li>
+                            <li><i class="bi bi-shield-check"></i> Eliminación de virus y malware</li>
+                            <li><i class="bi bi-wifi"></i> Configuración de redes</li>
+                            <li><i class="bi bi-gear"></i> Mantenimiento preventivo</li>
+                        </ul>
                     </div>
                     <div class="col-md-6">
-                        <div class="service-benefits">
-                            <h6 class="serif-font">Beneficios</h6>
-                            <div class="benefit-grid">
-                                <div class="benefit-item">
-                                    <i class="bi bi-lightning-charge"></i>
-                                    <p>Mayor rendimiento</p>
-                                </div>
-                                <div class="benefit-item">
-                                    <i class="bi bi-clock"></i>
-                                    <p>Menos tiempo inactivo</p>
-                                </div>
-                                <div class="benefit-item">
-                                    <i class="bi bi-shield-check"></i>
-                                    <p>Sistemas protegidos</p>
-                                </div>
-                                <div class="benefit-item">
-                                    <i class="bi bi-graph-up-arrow"></i>
-                                    <p>Mayor productividad</p>
-                                </div>
+                        <div class="glass-inner h-100 d-flex flex-column justify-content-center p-4">
+                            <h6 class="fw-bold mb-3">¿Por qué elegirnos?</h6>
+                            <ul class="feature-list mb-4">
+                                <li><i class="bi bi-lightning-charge"></i> Respuesta rápida</li>
+                                <li><i class="bi bi-graph-up-arrow"></i> Mejor rendimiento</li>
+                                <li><i class="bi bi-person-check"></i> Soporte personalizado</li>
+                                <li><i class="bi bi-award"></i> Garantía de satisfacción</li>
+                            </ul>
+                            <div class="text-end mt-auto">
+                                <a href="#contacto" class="btn btn-primary px-4 py-2">Solicitar Servicio</a>
                             </div>
                         </div>
                     </div>
@@ -262,55 +244,40 @@
 
 <div class="modal fade" id="servicioSeguridadModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl">
-        <div class="modal-content service-modal">
-            <div class="modal-header">
-                <h5 class="modal-title serif-font">Seguridad Informática</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content service-modal glass-dark p-0">
+            <div class="modal-header border-0 pb-0" style="border-radius: 20px 20px 0 0;">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="service-icon-modern" style="background:rgba(0,255,136,0.12);color:#00ff88;border:2px solid #00ff88;">
+                        <i class="bi bi-shield-lock"></i>
+                    </div>
+                    <h5 class="modal-title serif-font mb-0" style="color:#00ff88;">Seguridad Informática</h5>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
-            <div class="modal-body">
-                <div class="row">
+            <div class="modal-body pt-0 pb-4 px-4">
+                <div class="row g-4 align-items-center">
                     <div class="col-md-6">
-                        <div class="service-schema">
-                            <div class="schema-section">
-                                <h6 class="serif-font">Protección Proactiva</h6>
-                                <ul class="feature-list">
-                                    <li><i class="bi bi-shield-check"></i> Auditorías de seguridad completas</li>
-                                    <li><i class="bi bi-shield-check"></i> Análisis de vulnerabilidades</li>
-                                    <li><i class="bi bi-shield-check"></i> Implementación de firewalls</li>
-                                    <li><i class="bi bi-shield-check"></i> Sistemas de detección de intrusos</li>
-                                </ul>
-                            </div>
-                            <div class="schema-section">
-                                <h6 class="serif-font">Servicios Especializados</h6>
-                                <ul class="feature-list">
-                                    <li><i class="bi bi-shield-check"></i> Pentesting profesional</li>
-                                    <li><i class="bi bi-shield-check"></i> Gestión de incidentes</li>
-                                    <li><i class="bi bi-shield-check"></i> Recuperación ante desastres</li>
-                                    <li><i class="bi bi-shield-check"></i> Cumplimiento normativo</li>
-                                </ul>
-                            </div>
-                        </div>
+                       
+                        <ul class="feature-list mt-3">
+                            <li><i class="bi bi-shield-check"></i> Auditoría y análisis de vulnerabilidades</li>
+                            <li><i class="bi bi-lock"></i> Implementación de firewalls y antivirus</li>
+                            <li><i class="bi bi-people"></i> Capacitación en ciberseguridad</li>
+                            <li><i class="bi bi-eye"></i> Monitoreo continuo 24/7</li>
+                            <li><i class="bi bi-patch-check"></i> Certificación segura</li>
+                            <li><i class="bi bi-shield-exclamation"></i> Respuesta ante incidentes</li>
+                        </ul>
                     </div>
                     <div class="col-md-6">
-                        <div class="service-benefits">
-                            <h6 class="serif-font">Beneficios</h6>
-                            <div class="benefit-grid">
-                                <div class="benefit-item">
-                                    <i class="bi bi-lock"></i>
-                                    <p>Protección 24/7</p>
-                                </div>
-                                <div class="benefit-item">
-                                    <i class="bi bi-shield"></i>
-                                    <p>Prevención proactiva</p>
-                                </div>
-                                <div class="benefit-item">
-                                    <i class="bi bi-eye"></i>
-                                    <p>Monitoreo continuo</p>
-                                </div>
-                                <div class="benefit-item">
-                                    <i class="bi bi-patch-check"></i>
-                                    <p>Certificación segura</p>
-                                </div>
+                        <div class="glass-inner h-100 d-flex flex-column justify-content-center p-4">
+                            <h6 class="fw-bold mb-3" style="color:#00ff88;">Beneficios</h6>
+                            <ul class="feature-list mb-4">
+                                <li><i class="bi bi-check2-circle"></i> Protección proactiva</li>
+                                <li><i class="bi bi-graph-up"></i> Reducción de riesgos</li>
+                                <li><i class="bi bi-person-lock"></i> Privacidad garantizada</li>
+                                <li><i class="bi bi-shield-shaded"></i> Cumplimiento normativo</li>
+                            </ul>
+                            <div class="text-end mt-auto">
+                                <a href="#contacto" class="btn btn-primary px-4 py-2">Solicitar Servicio</a>
                             </div>
                         </div>
                     </div>
@@ -322,55 +289,38 @@
 
 <div class="modal fade" id="servicioConsultoriaModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl">
-        <div class="modal-content service-modal">
-            <div class="modal-header">
-                <h5 class="modal-title serif-font">Consultoría Empresarial</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content service-modal glass-dark">
+            <div class="modal-header border-0 pb-0">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="service-icon-modern" style="background:rgba(255,153,0,0.12);color:#ff9900;">
+                        <i class="bi bi-graph-up"></i>
+                    </div>
+                    <h5 class="modal-title serif-font mb-0" style="color:#ff9900;">Consultoría Empresarial</h5>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
-            <div class="modal-body">
-                <div class="row">
+            <div class="modal-body pt-0">
+                <div class="row g-4 align-items-center">
                     <div class="col-md-6">
-                        <div class="service-schema">
-                            <div class="schema-section">
-                                <h6 class="serif-font">Transformación Digital</h6>
-                                <ul class="feature-list">
-                                    <li><i class="bi bi-arrow-up-circle"></i> Análisis de procesos actuales</li>
-                                    <li><i class="bi bi-arrow-up-circle"></i> Estrategia digital personalizada</li>
-                                    <li><i class="bi bi-arrow-up-circle"></i> Optimización de operaciones</li>
-                                    <li><i class="bi bi-arrow-up-circle"></i> Implementación de soluciones</li>
-                                </ul>
-                            </div>
-                            <div class="schema-section">
-                                <h6 class="serif-font">Mejora Continua</h6>
-                                <ul class="feature-list">
-                                    <li><i class="bi bi-arrow-up-circle"></i> Capacitación del personal</li>
-                                    <li><i class="bi bi-arrow-up-circle"></i> Gestión del cambio</li>
-                                    <li><i class="bi bi-arrow-up-circle"></i> Medición de resultados</li>
-                                    <li><i class="bi bi-arrow-up-circle"></i> Ajustes y optimización</li>
-                                </ul>
-                            </div>
-                        </div>
+                            <ul class="feature-list mt-3">
+                            <li><i class="bi bi-arrow-up-circle"></i> Análisis de procesos</li>
+                            <li><i class="bi bi-lightbulb"></i> Estrategia digital</li>
+                            <li><i class="bi bi-people"></i> Capacitación y formación</li>
+                            <li><i class="bi bi-gear"></i> Automatización de tareas</li>
+                            <li><i class="bi bi-bar-chart-line"></i> Mejora continua</li>
+                        </ul>
                     </div>
                     <div class="col-md-6">
-                        <div class="service-benefits">
-                            <h6 class="serif-font">Beneficios</h6>
-                            <div class="benefit-grid">
-                                <div class="benefit-item">
-                                    <i class="bi bi-graph-up-arrow"></i>
-                                    <p>Mayor eficiencia</p>
-                                </div>
-                                <div class="benefit-item">
-                                    <i class="bi bi-currency-dollar"></i>
-                                    <p>Reducción de costos</p>
-                                </div>
-                                <div class="benefit-item">
-                                    <i class="bi bi-people"></i>
-                                    <p>Mejor colaboración</p>
-                                </div>
-                                <div class="benefit-item">
-                                    <i class="bi bi-rocket-takeoff"></i>
-                                    <p>Crecimiento sostenible</p>
-                                </div>
+                        <div class="p-4 rounded glass-inner h-100 d-flex flex-column justify-content-center">
+                            <h6 class="fw-bold mb-3" style="color:#ff9900;">¿Qué obtienes?</h6>
+                            <ul class="feature-list mb-4">
+                                <li><i class="bi bi-rocket"></i> Impulso a la innovación</li>
+                                <li><i class="bi bi-people-fill"></i> Equipo más eficiente</li>
+                                <li><i class="bi bi-award"></i> Competitividad en el mercado</li>
+                                <li><i class="bi bi-graph-up-arrow"></i> Crecimiento sostenible</li>
+                            </ul>
+                            <div class="text-end">
+                                <a href="#contacto" class="btn btn-primary">Solicitar Servicio</a>
                             </div>
                         </div>
                     </div>
