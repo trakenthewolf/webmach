@@ -249,10 +249,12 @@
     margin: 0 0.5rem;
     font-size: 1.2rem;
     transition: color 0.3s ease;
+    display: inline-block;
 }
 
 .team-social a:hover {
     color: #39FF14;
+    transform: scale(1.15) rotate(-5deg);
 }
 
 /* Responsive */
@@ -857,4 +859,62 @@
 /* Actualizar rutas de fondos */
 .neural-background {
     background: #111;
-} 
+}
+
+.instagram-header-link {
+    display: inline-block;
+    font-size: 2rem;
+    color: #fff;
+    margin-left: 1rem;
+    vertical-align: middle;
+    text-shadow: 0 0 12px #E4405F, 0 0 24px #fff;
+    transition: color 0.2s, text-shadow 0.2s, transform 0.2s;
+}
+.instagram-header-link:hover {
+    color: #E4405F;
+    text-shadow: 0 0 24px #E4405F, 0 0 32px #fff;
+    transform: scale(1.15) rotate(-5deg);
+}
+
+.header-social-link {
+    display: inline-block;
+    font-size: 1.5rem;
+    color: #fff;
+    margin-left: 0.7rem;
+    vertical-align: middle;
+    text-shadow: 0 0 8px #E4405F, 0 0 12px #fff;
+    transition: color 0.2s, text-shadow 0.2s, transform 0.2s;
+}
+.header-social-link:hover {
+    color: #E4405F;
+    text-shadow: 0 0 16px #E4405F, 0 0 24px #fff;
+    transform: scale(1.12) rotate(-5deg);
+}
+.header-social-link .bi-whatsapp {
+    color: #25D366;
+    text-shadow: 0 0 8px #25D366, 0 0 12px #ffffff33;
+}
+.header-social-link:hover .bi-whatsapp {
+    color: #128C7E;
+    text-shadow: 0 0 16px #128C7E, 0 0 24px #fff;
+}
+
+/* Solo mostrar los íconos sociales junto al logo en móvil */
+.header-social-link {
+    font-size: 1.3rem;
+    color: #fff;
+    vertical-align: middle;
+    margin-left: 0.3rem;
+    text-shadow: 0 0 8px #E4405F, 0 0 12px #fff;
+    transition: color 0.2s, text-shadow 0.2s, transform 0.2s;
+}
+.header-social-link .bi-whatsapp { color: #25D366; text-shadow: 0 0 8px #25D366, 0 0 12px #fff; }
+.header-social-link:hover { color: #E4405F; transform: scale(1.12) rotate(-5deg);}
+.header-social-link:hover .bi-whatsapp { color: #128C7E; }
+
+@media (min-width: 992px) {
+    .navbar-brand .d-lg-none { display: none !important; }
+}
+@media (max-width: 991.98px) {
+    .navbar-brand .d-lg-none { display: inline !important; }
+}
