@@ -3655,7 +3655,7 @@ body, html {
   /* Animaciones para los elementos interactivos */
   @keyframes pulse {
       0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
+      50% { transform: scale(1.1); }
       100% { transform: scale(1); }
   }
   
@@ -3843,4 +3843,121 @@ body, html {
 #cursosRecomendadosModal .curso-content p {
     margin-bottom: 1.5rem;
     color: #e0e0e0;
+}
+
+/* Estilos actualizados para el pop-up de consulta */
+.consulta-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.95);
+    border: 2px solid #39FF14;
+    border-radius: 15px;
+    padding: 25px;
+    width: 90%;
+    max-width: 400px;
+    z-index: 1001;
+    box-shadow: 0 0 30px rgba(57, 255, 20, 0.3);
+    display: none;
+}
+
+/* Overlay oscuro difuminado */
+.consulta-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    display: none;
+}
+
+.consulta-popup.show,
+.consulta-overlay.show {
+    display: block;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Mejoras visuales para el contenido */
+.consulta-content {
+    text-align: center;
+}
+
+.popup-icon {
+    font-size: 3rem;
+    color: #39FF14;
+    margin-bottom: 15px;
+    animation: pulse 2s infinite;
+}
+
+.consulta-popup h3 {
+    color: #39FF14;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+}
+
+.consulta-btn {
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: #25D366;
+    color: #fff;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.consulta-btn:hover {
+    background: #128C7E;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+}
+
+/* Estilos mejorados para el botón de cierre del popup */
+.consulta-popup .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #39FF14;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 0;
+    z-index: 2;
+}
+
+.consulta-popup .close-btn i {
+    color: #39FF14;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.consulta-popup .close-btn:hover {
+    background: rgba(57, 255, 20, 0.2);
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.5);
+    transform: rotate(90deg);
+}
+
+.consulta-popup .close-btn:hover i {
+    color: #fff;
 }
