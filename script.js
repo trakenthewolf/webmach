@@ -1048,12 +1048,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 3000); // Aumentado a 3 segundos
 });
 
+// Mostrar el popup después de 5 segundos
 document.addEventListener('DOMContentLoaded', function() {
-    // Mostrar el popup después de 5 segundos
-    setTimeout(function() {
-        const popup = document.getElementById('consultaPopup');
-        popup.classList.add('show');
-    }, 5000);
+    // Pequeño retardo para asegurar que la página esté cargada
+    setTimeout(showConsultaPopup, 1000);
 });
 
 function showConsultaPopup() {
@@ -1085,3 +1083,11 @@ document.querySelector('.consulta-overlay').addEventListener('click', function()
 document.querySelector('.consulta-popup').addEventListener('click', function(e) {
     e.stopPropagation();
 });
+
+// Verificar si el popup ya fue mostrado en esta sesión
+if (!sessionStorage.getItem('popupShown')) {
+    // Mostrar el popup después de 1 segundo
+    setTimeout(showConsultaPopup, 1000);
+    // Marcar el popup como mostrado
+    sessionStorage.setItem('popupShown', 'true');
+}
