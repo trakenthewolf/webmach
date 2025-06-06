@@ -1048,4 +1048,40 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 3000); // Aumentado a 3 segundos
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    // Mostrar el popup después de 5 segundos
+    setTimeout(function() {
+        const popup = document.getElementById('consultaPopup');
+        popup.classList.add('show');
+    }, 5000);
+});
 
+function showConsultaPopup() {
+    const popup = document.getElementById('consultaPopup');
+    const overlay = document.querySelector('.consulta-overlay');
+    popup.classList.add('show');
+    overlay.classList.add('show');
+}
+
+function closeConsultaPopup() {
+    const popup = document.getElementById('consultaPopup');
+    const overlay = document.querySelector('.consulta-overlay');
+    popup.classList.remove('show');
+    overlay.classList.remove('show');
+}
+
+// Mostrar el popup cada vez que se carga la página
+document.addEventListener('DOMContentLoaded', function() {
+    // Pequeño retardo para asegurar que la página esté cargada
+    setTimeout(showConsultaPopup, 1000);
+});
+
+// Cerrar al hacer clic en el overlay
+document.querySelector('.consulta-overlay').addEventListener('click', function() {
+    closeConsultaPopup();
+});
+
+// Prevenir que el clic dentro del popup cierre el overlay
+document.querySelector('.consulta-popup').addEventListener('click', function(e) {
+    e.stopPropagation();
+});
