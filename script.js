@@ -522,72 +522,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Mostrar el modal de cursos después del splash screen
-    setTimeout(() => {
-        showCursosRecomendados();
-    }, 3500); // 3.5 segundos después de cargar (después del splash screen)
+    setTimeout(function() {
+      var modal = new bootstrap.Modal(document.getElementById('cursosRecomendadosModal'));
+      modal.show();
+    }, 3000); // Aumentado a 3 segundos
 });
-
-function showCursosRecomendados() {
-    const modalHTML = `
-        <div class="modal fade" id="cursosRecomendadosModal">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content cyber-modal">
-                    <div class="modal-header">
-                        <div class="d-flex align-items-center">
-                            <i class="bi bi-mortarboard-fill fs-3 me-2 text-neon"></i>
-                            <h5 class="modal-title mb-0">¡Los Mejores Cursos de Ciberseguridad!</h5>
-                        </div>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="cursos-grid">
-                            <!-- Hack4u -->
-                            <div class="curso-card">
-                                <img src="fotos,videos/savitar.jpg" alt="Hack4u" class="curso-imagen">
-                                <div class="curso-content">
-                                    <h3>Hack4u Academy</h3>
-                                    <p>La academia #1 de hacking en español. Laboratorios prácticos y contenido actualizado.</p>
-                                    <a href="https://hack4u.io/" class="btn-curso" target="_blank">
-                                        Explorar Academia
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Contando Bits -->
-                            <div class="curso-card">
-                                <img src="fotos,videos/bitacademia.jpg" alt="Contando Bits" class="curso-imagen">
-                                <div class="curso-content">
-                                    <h3>Contando Bits</h3>
-                                    <p>Cursos especializados en hacking ético y ciberseguridad desde cero.</p>
-                                    <a href="https://www.contandobits.com/cursos/" class="btn-curso" target="_blank">
-                                        Ver Cursos
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Securiters -->
-                            <div class="curso-card">
-                                <img src="fotos,videos/securite.jpg" alt="Securiters" class="curso-imagen">
-                                <div class="curso-content">
-                                    <h3>Securiters</h3>
-                                    <p>Formación práctica en auditoría web y ciberseguridad ofensiva.</p>
-                                    <a href="https://securiters.com/" class="btn-curso" target="_blank">
-                                        Descubrir Más
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-
-    document.body.insertAdjacentHTML('beforeend', modalHTML);
-    const modal = new bootstrap.Modal(document.getElementById('cursosRecomendadosModal'));
-    modal.show();
-}
 
 // Mejora del rendimiento del scroll
 let ticking = false;
@@ -1096,3 +1035,17 @@ function closeQuestionModal() {
         }, 300);
     }
 }
+
+// filepath: c:\Users\maxi\Desktop\webmach-main\script.js
+document.addEventListener('DOMContentLoaded', function() {
+    // Esperar un poco más para asegurar que todo esté cargado
+    setTimeout(function() {
+        const modalEl = document.getElementById('cursosRecomendadosModal');
+        if (modalEl) {
+            const modal = new bootstrap.Modal(modalEl);
+            modal.show();
+        }
+    }, 3000); // Aumentado a 3 segundos
+});
+
+
