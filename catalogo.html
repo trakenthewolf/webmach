@@ -1,0 +1,2073 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo - CODEMACH</title>
+
+  <!-- Estilos principales -->
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="catalogo.css" />
+
+  <!-- Fuentes y librerías -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+
+<body>
+  <div class="particles-container" id="particles-js"></div>
+
+  <!-- ===============================
+       ENCABEZADO
+  ================================== -->
+  <header>
+    <div class="logo-container">
+      <a href="index.html">
+        <img src="CODEMACH.png" alt="CODEMACH Logo" class="logo" />
+      </a>
+    </div>
+
+    <nav>
+      <ul class="nav-links">
+       
+        
+        <li><a href="https://webmach.com.ar/" target="_blank">Quiénes Somos</a></li>
+        <li><a href="https://webmach.com.ar/" target="_blank" >Contacto</a></li>
+      </ul>
+
+      <div class="cart-icon">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count">0</span>
+      </div>
+
+      <div class="menu-toggle">
+        <span></span><span></span><span></span>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ===============================
+       CARRITO DE COMPRAS
+  ================================== -->
+  <div class="cart-sidebar">
+    <div class="cart-header">
+      <h3>Carrito de Compras</h3>
+      <button class="close-cart"><i class="fas fa-times"></i></button>
+    </div>
+
+    <div class="cart-items">
+      <!-- Los items del carrito se agregarán dinámicamente aquí -->
+    </div>
+
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Total:</span>
+        <strong>$0</strong>
+      </div>
+      <button class="btn checkout-btn">Finalizar Compra</button>
+    </div>
+  </div>
+
+  <div class="cart-overlay"></div>
+
+  <!-- ===============================
+       CHECKOUT
+  ================================== -->
+  <div class="checkout-overlay">
+    <div class="checkout-modal">
+      <div class="checkout-header">
+        <h3>Finalizar Compra</h3>
+        <button class="close-checkout"><i class="fas fa-times"></i></button>
+      </div>
+
+      <div class="checkout-content">
+        <form id="checkout-form">
+          <div class="form-group">
+            <label for="customer-name">Nombre</label>
+            <input type="text" id="customer-name" name="customer-name" required />
+          </div>
+
+          <div class="form-group">
+            <label>Tipo de envío</label>
+            <div class="radio-group">
+              <label>
+                <input type="radio" name="delivery-type" value="domicilio" id="delivery-home" />
+                Envío a domicilio
+              </label>
+              <label>
+                <input type="radio" name="delivery-type" value="punto-encuentro" id="delivery-meeting" checked />
+                Punto de encuentro
+              </label>
+            </div>
+          </div>
+
+          <!-- Campos para envío a domicilio -->
+          <div id="home-delivery-fields" style="display: none;">
+            <div class="form-group">
+              <label for="customer-province">Provincia</label>
+              <input type="text" id="customer-province" name="customer-province" />
+            </div>
+
+            <div class="form-group">
+              <label for="customer-locality">Localidad</label>
+              <input type="text" id="customer-locality" name="customer-locality" />
+            </div>
+
+            <div class="form-group">
+              <label for="customer-street">Dirección (calle)</label>
+              <input type="text" id="customer-street" name="customer-street" />
+            </div>
+
+            <div class="form-group">
+              <label for="customer-number">Numeración</label>
+              <input type="text" id="customer-number" name="customer-number" />
+            </div>
+
+            <div class="form-group">
+              <label>Tipo de vivienda</label>
+              <div class="radio-group">
+                <label>
+                  <input type="radio" name="home-type" value="casa" checked /> Casa
+                </label>
+                <label>
+                  <input type="radio" name="home-type" value="departamento" /> Departamento
+                </label>
+              </div>
+            </div>
+
+            <div id="department-details" style="display: none;">
+              <div class="form-group">
+                <label for="floor">Piso</label>
+                <input type="text" id="floor" name="floor" />
+              </div>
+              <div class="form-group">
+                <label for="department-number">Número de departamento</label>
+                <input type="text" id="department-number" name="department-number" />
+              </div>
+            </div>
+          </div>
+
+          <div class="checkout-summary">
+            <h4>Resumen del pedido</h4>
+            <div class="checkout-items">
+              <!-- Items dinámicos -->
+            </div>
+            <div class="checkout-total">
+              <span>Total:</span>
+              <strong>$0</strong>
+            </div>
+          </div>
+
+<button type="submit" class="btn primary-btn">Terminar compra</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Thank you pop-up -->
+  <div id="thank-you-overlay" class="overlay" style="display: none;">
+    <div class="modal">
+      <h3>¡Gracias por su compra!</h3>
+      <p>Su pedido ha sido procesado exitosamente.</p>
+      <button id="close-thank-you">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- ===============================
+       CONTENIDO PRINCIPAL
+  ================================== -->
+  <main class="catalog-page">
+    <section class="catalog-hero">
+      <div class="catalog-hero-content">
+        <h1>Catálogo de Productos</h1>
+        <p>Descubra nuestra selección de productos electrónicos de alta calidad</p>
+      </div>
+    </section>
+
+    <!-- FILTROS -->
+    <section class="catalog-filters">
+      <div class="filter-container">
+    <button class="filter-btn active" data-category="all">Todos</button>
+    <button class="filter-btn" data-category="auriculares">Auriculares</button>
+    <button class="filter-btn" data-category="parlantes">Parlantes</button>
+    <button class="filter-btn" data-category="teclados">Teclados</button>
+    <button class="filter-btn" data-category="computacion">Computación</button>
+  </div>
+    </section>
+
+    <!-- ===============================
+         VISOR DE PRODUCTOS
+    ================================== -->
+    <div class="product-viewer-modal">
+      <div class="product-viewer-content">
+        <button class="close-viewer"><i class="fas fa-times"></i></button>
+        <div class="product-images-container">
+          <div class="main-product-image">
+            <img src="img/placeholder.jpg" alt="Producto" />
+          </div>
+          <div class="product-thumbnails"></div>
+        </div>
+
+        <div class="product-viewer-details">
+          <h2 class="product-viewer-title"></h2>
+          <p class="product-viewer-description"></p>
+          <div class="product-viewer-price"></div>
+        </div>
+      </div>
+    </div>
+    <div class="product-viewer-overlay"></div>
+
+    <!-- ===============================
+         PRODUCTOS
+    ================================== -->
+    <section class="catalog-grid-container">
+      <div class="catalog-grid">
+        <!-- Cada product-card está bien estructurado -->
+        <div
+          class="product-card"
+          data-category="auriculares"
+          data-id="auri1"
+          data-product-code="AURI001"
+        >
+          <div class="product-image">
+            <img
+              src="./catalogo/Auriculares/AURICULAR I12 MULTICOLOR/AURICULAR I12 MULTICOLOR1.png"
+              alt="Auricular I12 Multicolor"
+            />
+          </div>
+          <h3>Auricular I12 Multicolor</h3>
+          <p>Auriculares inalámbricos con múltiples colores disponibles</p>
+          <div class="product-details">
+              <div class="product-price"><strong>$7,500</strong></div>
+          </div>
+          <div class="product-actions">
+            <button
+              class="btn view-product-btn"
+              data-product-id="auri1"
+              data-product-name="Auricular I12 Multicolor"
+                data-product-price="7500"
+              data-product-description="Auriculares inalámbricos con conexión Bluetooth 5.0, compatible con todos los dispositivos. Disponible en varios colores."
+              data-product-images='["./catalogo/Auriculares/AURICULAR I12 MULTICOLOR/AURICULAR I12 MULTICOLOR1.png", "./catalogo/Auriculares/AURICULAR I12 MULTICOLOR/AURICULAR I12 MULTICOLOR2.png"]'
+            >
+              Ver Detalles
+            </button>
+            <button
+              class="btn add-to-cart-btn"
+              data-product-id="auri1"
+              data-product-name="Auricular I12 Multicolor"
+                data-product-price="7500"
+              data-product-code="AURI001"
+              data-product-image="catalogo/Auriculares/AURICULAR I12 MULTICOLOR 1.png"
+            >
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- AURICULARES APP PANTALLA -->
+        <div
+          class="product-card"
+          data-category="auriculares"
+          data-id="auri2"
+          data-product-code="AURI002"
+        >
+          <div class="product-image">
+            <img
+              src="catalogo/Auriculares/AURICULARES APP PANTALLA/AURICULARES APP PANTALLA.png"
+              alt="Auriculares APP Pantalla"
+            />
+          </div>
+          <h3>Auriculares APP Pantalla</h3>
+          <p>Auriculares inalámbricos con pantalla LED y control por aplicación</p>
+          <div class="product-details">
+              <div class="product-price"><strong>$30,500</strong></div>
+          </div>
+          <div class="product-actions">
+            <button
+              class="btn view-product-btn"
+              data-product-id="auri2"
+              data-product-name="Auriculares APP Pantalla"
+                data-product-price="30500"
+              data-product-description="Auriculares inalámbricos con pantalla LED integrada. Control mediante aplicación móvil, conexión Bluetooth 5.0 y batería de larga duración."
+              data-product-images='["catalogo/Auriculares/AURICULARES APP PANTALLA/AURICULARES APP PANTALLA.png"]'
+            >
+              Ver Detalles
+            </button>
+            <button
+              class="btn add-to-cart-btn"
+              data-product-id="auri2"
+              data-product-name="Auriculares APP Pantalla"
+                data-product-price="30500"
+              data-product-code="AURI002"
+              data-product-image="catalogo/Auriculares/AURICULARES APP PANTALLA/AURICULARES APP PANTALLA.png"
+            >
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- AURICULARES CABLE EP14 -->
+        <div
+          class="product-card"
+          data-category="auriculares"
+          data-id="auri3"
+          data-product-code="AURI003"
+        >
+          <div class="product-image">
+            <img
+              src="catalogo/Auriculares/AURICULARES CABLE EP14/AURICULARES CABLE EP14.png"
+              alt="Auriculares Cable EP14"
+            />
+          </div>
+          <h3>Auriculares Cable EP14</h3>
+          <p>Auriculares con cable de alta calidad y excelente sonido</p>
+          <div class="product-details">
+              <div class="product-price"><strong>$2,500</strong></div>
+          </div>
+          <div class="product-actions">
+            <button
+              class="btn view-product-btn"
+              data-product-id="auri3"
+              data-product-name="Auriculares Cable EP14"
+                data-product-price="2500"
+              data-product-description="Auriculares con cable modelo EP14, con excelente calidad de sonido, micrófono incorporado y control de volumen en el cable."
+              data-product-images='["catalogo/Auriculares/AURICULARES CABLE EP14/AURICULARES CABLE EP14.png"]'
+            >
+              Ver Detalles
+            </button>
+            <button
+              class="btn add-to-cart-btn"
+              data-product-id="auri3"
+              data-product-name="Auriculares Cable EP14"
+                data-product-price="2500"
+              data-product-code="AURI003"
+              data-product-image="catalogo/Auriculares/AURICULARES CABLE EP14/AURICULARES CABLE EP14.png"
+            >
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- AURICULARES COMUNES CABLE X 3 COLORES -->
+        <div
+          class="product-card"
+          data-category="auriculares"
+          data-id="auri4"
+          data-product-code="AURI004"
+        >
+          <div class="product-image">
+            <img
+              src="catalogo/Auriculares/AURICULARES COMUNES CABLE X 3  COLORES/AURICULARES COMUNES CABLE X 3  COLORES.png"
+              alt="Auriculares Comunes Cable (3 Colores)"
+            />
+          </div>
+          <h3>Auriculares Comunes Cable</h3>
+          <p>Auriculares con cable disponibles en 3 colores diferentes</p>
+          <div class="product-details">
+              <div class="product-price"><strong>$2,200</strong></div>
+          </div>
+          <div class="product-actions">
+            <button
+              class="btn view-product-btn"
+              data-product-id="auri4"
+              data-product-name="Auriculares Comunes Cable (3 Colores)"
+                data-product-price="2200"
+              data-product-description="Auriculares con cable disponibles en 3 colores diferentes. Sonido claro y potente, compatibles con todos los dispositivos con entrada de 3.5mm."
+              data-product-images='["catalogo/Auriculares/AURICULARES COMUNES CABLE X 3  COLORES/AURICULARES COMUNES CABLE X 3  COLORES.png"]'
+            >
+              Ver Detalles
+            </button>
+            <button
+              class="btn add-to-cart-btn"
+              data-product-id="auri4"
+              data-product-name="Auriculares Comunes Cable (3 Colores)"
+                data-product-price="2200"
+              data-product-code="AURI004"
+              data-product-image="catalogo/Auriculares/AURICULARES COMUNES CABLE X 3  COLORES/AURICULARES COMUNES CABLE X 3  COLORES.png"
+            >
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- AURICULARES COMUNES SAMSUNG -->
+        <div
+          class="product-card"
+          data-category="auriculares"
+          data-id="auri5"
+          data-product-code="AURI005"
+        >
+          <div class="product-image">
+            <img
+              src="catalogo/Auriculares/AURICULARES COMUNES SAMSUNG/AURICULARES COMUNES SAMSUNG.png"
+              alt="Auriculares Comunes Samsung"
+            />
+          </div>
+          <h3>Auriculares Comunes Samsung</h3>
+          <p>Auriculares originales Samsung con excelente calidad de sonido</p>
+          <div class="product-details">
+              <div class="product-price"><strong>$2,000</strong></div>
+          </div>
+          <div class="product-actions">
+            <button
+              class="btn view-product-btn"
+              data-product-id="auri5"
+              data-product-name="Auriculares Comunes Samsung"
+                data-product-price="2000"
+              data-product-description="Auriculares originales Samsung con cable. Excelente calidad de sonido, micrófono incorporado y botón multifunción para control de llamadas y música."
+              data-product-images='["catalogo/Auriculares/AURICULARES COMUNES SAMSUNG/AURICULARES COMUNES SAMSUNG.png"]'
+            >
+              Ver Detalles
+            </button>
+            <button
+              class="btn add-to-cart-btn"
+              data-product-id="auri5"
+              data-product-name="Auriculares Comunes Samsung"
+                data-product-price="2000"
+              data-product-code="AURI005"
+              data-product-image="catalogo/Auriculares/AURICULARES COMUNES SAMSUNG/AURICULARES COMUNES SAMSUNG.png"
+            >
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- AURICULARES DEPORTIVOS -->
+        <div
+          class="product-card"
+          data-category="auriculares"
+          data-id="auri6"
+          data-product-code="AURI006"
+        >
+          <div class="product-image">
+            <img
+              src="catalogo/Auriculares/AURICULARES DEPORTIVOS/AURICULARES DEPORTIVOS.png"
+              alt="Auriculares Deportivos"
+            />
+          </div>
+          <h3>Auriculares Deportivos</h3>
+          <p>Auriculares especiales para actividades deportivas, resistentes al sudor</p>
+          <div class="product-details">
+              <div class="product-price"><strong>$10,500</strong></div>
+          </div>
+          <div class="product-actions">
+            <button
+              class="btn view-product-btn"
+              data-product-id="auri6"
+              data-product-name="Auriculares Deportivos"
+                data-product-price="10500"
+              data-product-description="Auriculares deportivos resistentes al sudor y agua. Diseño ergonómico que se mantiene en su lugar durante la actividad física. Excelente calidad de sonido y batería de larga duración."
+              data-product-images='["catalogo/Auriculares/AURICULARES DEPORTIVOS/AURICULARES DEPORTIVOS.png"]'
+            >
+              Ver Detalles
+            </button>
+            <button
+              class="btn add-to-cart-btn"
+              data-product-id="auri6"
+              data-product-name="Auriculares Deportivos"
+                data-product-price="10500"
+              data-product-code="AURI006"
+              data-product-image="catalogo/Auriculares/AURICULARES DEPORTIVOS/AURICULARES DEPORTIVOS.png"
+            >
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- AURICULARES EXTRABASS -->
+        <div
+          class="product-card"
+          data-category="auriculares"
+          data-id="auri7"
+          data-product-code="AURI007"
+        >
+          <div class="product-image">
+            <img
+              src="catalogo/Auriculares/AURICULARES EXTRABASS/AURICULARES EXTRABASS.png"
+              alt="Auriculares Extrabass"
+            />
+          </div>
+          <h3>Auriculares Extrabass</h3>
+          <p>Auriculares con tecnología de bajos mejorados para una experiencia inmersiva</p>
+          <div class="product-details">
+              <div class="product-price"><strong>$6,500</strong></div>
+          </div>
+          <div class="product-actions">
+            <button
+              class="btn view-product-btn"
+              data-product-id="auri7"
+              data-product-name="Auriculares Extrabass"
+                data-product-price="6500"
+              data-product-description="Auriculares con tecnología Extrabass para potenciar los graves. Sonido envolvente y potente, ideal para amantes de la música con bajos pronunciados."
+              data-product-images='["catalogo/Auriculares/AURICULARES EXTRABASS/AURICULARES EXTRABASS.png"]'
+            >
+              Ver Detalles
+            </button>
+            <button
+              class="btn add-to-cart-btn"
+              data-product-id="auri7"
+              data-product-name="Auriculares Extrabass"
+                data-product-price="6500"
+              data-product-code="AURI007"
+              data-product-image="catalogo/Auriculares/AURICULARES EXTRABASS/AURICULARES EXTRABASS.png"
+            >
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- AURICULARES NOBLES CABLE -->
+        <div
+          class="product-card"
+          data-category="auriculares"
+          data-id="auri8"
+          data-product-code="AURI008"
+        >
+          <div class="product-image">
+            <img
+              src="catalogo/Auriculares/AURICULARES NOBLES CABLE/AURICULARES NOBLES CABLE.png"
+              alt="Auriculares Nobles Cable"
+            />
+          </div>
+          <h3>Auriculares Nobles Cable</h3>
+          <p>Auriculares con cable de diseño elegante y sonido de alta fidelidad</p>
+          <div class="product-details">
+              <div class="product-price"><strong>$6,400</strong></div>
+          </div>
+          <div class="product-actions">
+            <button
+              class="btn view-product-btn"
+              data-product-id="auri8"
+              data-product-name="Auriculares Nobles Cable"
+                data-product-price="6400"
+              data-product-description="Auriculares con cable de diseño elegante y acabado premium. Sonido de alta fidelidad, graves profundos y agudos cristalinos. Cable reforzado para mayor durabilidad."
+              data-product-images='["catalogo/Auriculares/AURICULARES NOBLES CABLE/AURICULARES NOBLES CABLE.png"]'
+            >
+              Ver Detalles
+            </button>
+            <button
+              class="btn add-to-cart-btn"
+              data-product-id="auri8"
+              data-product-name="Auriculares Nobles Cable"
+                data-product-price="6400"
+              data-product-code="AURI008"
+              data-product-image="catalogo/Auriculares/AURICULARES NOBLES CABLE/AURICULARES NOBLES CABLE.png"
+            >
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- AURICULARES NOGA CABLE DEPORTIVOS -->
+        <div
+          class="product-card"
+          data-category="auriculares"
+          data-id="auri9"
+          data-product-code="AURI009"
+        >
+          <div class="product-image">
+            <img
+              src="catalogo/Auriculares/AURICULARES NOGA CABLE DEPORTIVOS/AURICULARES NOGA CABLE DEPORTIVOS.png"
+              alt="Auriculares Noga Cable Deportivos"
+            />
+          </div>
+          <h3>Auriculares Noga Cable Deportivos</h3>
+          <p>Auriculares deportivos con cable de la marca Noga, resistentes y cómodos</p>
+          <div class="product-details">
+              <div class="product-price"><strong>$5,600</strong></div>
+          </div>
+          <div class="product-actions">
+            <button
+              class="btn view-product-btn"
+              data-product-id="auri9"
+              data-product-name="Auriculares Noga Cable Deportivos"
+                data-product-price="5600"
+              data-product-description="Auriculares deportivos con cable de la marca Noga. Diseño ergonómico que se ajusta perfectamente durante la actividad física. Resistentes al sudor y con excelente calidad de sonido."
+              data-product-images='["catalogo/Auriculares/AURICULARES NOGA CABLE DEPORTIVOS/AURICULARES NOGA CABLE DEPORTIVOS.png"]'
+            >
+              Ver Detalles
+            </button>
+            <button
+              class="btn add-to-cart-btn"
+              data-product-id="auri9"
+              data-product-name="Auriculares Noga Cable Deportivos"
+                data-product-price="5600"
+              data-product-code="AURI009"
+              data-product-image="catalogo/Auriculares/AURICULARES NOGA CABLE DEPORTIVOS/AURICULARES NOGA CABLE DEPORTIVOS.png"
+            >
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- AURICULARES SAMSUNG BUDS PRO -->
+        <div
+          class="product-card"
+          data-category="auriculares"
+          data-id="auri10"
+          data-product-code="AURI010"
+        >
+          <div class="product-image">
+            <img
+              src="catalogo/Auriculares/AURICULARES SAMSUNG BUDS PRO/AURICULARES SAMSUNG BUDS PRO 1.png"
+              alt="Auriculares Samsung Buds Pro"
+            />
+          </div>
+          <h3>Auriculares Samsung Buds Pro</h3>
+          <p>Auriculares inalámbricos premium de Samsung con cancelación de ruido activa</p>
+          <div class="product-details">
+              <div class="product-price"><strong>$36,680</strong></div>
+          </div>
+          <div class="product-actions">
+            <button
+              class="btn view-product-btn"
+              data-product-id="auri10"
+              data-product-name="Auriculares Samsung Buds Pro"
+                data-product-price="36680"
+              data-product-description="Auriculares inalámbricos premium Samsung Buds Pro con cancelación de ruido activa, sonido envolvente, resistencia al agua IPX7 y estuche de carga inalámbrica."
+              data-product-images='["catalogo/Auriculares/AURICULARES SAMSUNG BUDS PRO/AURICULARES SAMSUNG BUDS PRO 1.png", "catalogo/Auriculares/AURICULARES SAMSUNG BUDS PRO/AURICULARES SAMSUNG BUDS PRO 2.png", "catalogo/Auriculares/AURICULARES SAMSUNG BUDS PRO/AURICULARES SAMSUNG BUDS PRO 3.png"]'
+            >
+              Ver Detalles
+            </button>
+            <button
+              class="btn add-to-cart-btn"
+              data-product-id="auri10"
+              data-product-name="Auriculares Samsung Buds Pro"
+                data-product-price="36680"
+              data-product-code="AURI010"
+              data-product-image="catalogo/Auriculares/AURICULARES SAMSUNG BUDS PRO/AURICULARES SAMSUNG BUDS PRO 1.png"
+            >
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- AURICULARES XAEA -->
+        <div
+          class="product-card"
+          data-category="auriculares"
+          data-id="auri11"
+          data-product-code="AURI011"
+        >
+          <div class="product-image">
+            <img
+              src="catalogo/Auriculares/AURICULARES XAEA/AURICULARES XAEA 1.png"
+              alt="Auriculares XAEA"
+            />
+          </div>
+          <h3>Auriculares XAEA</h3>
+          <p>Auriculares inalámbricos XAEA con diseño moderno y sonido de alta calidad</p>
+          <div class="product-details">
+              <div class="product-price"><strong>$60,620</strong></div>
+          </div>
+          <div class="product-actions">
+            <button
+              class="btn view-product-btn"
+              data-product-id="auri11"
+              data-product-name="Auriculares XAEA"
+                data-product-price="60620"
+              data-product-description="Auriculares inalámbricos XAEA con diseño moderno y elegante. Sonido de alta calidad, conexión Bluetooth 5.0 y batería de larga duración. Incluye estuche de carga."
+              data-product-images='["catalogo/Auriculares/AURICULARES XAEA/AURICULARES XAEA 1.png", "catalogo/Auriculares/AURICULARES XAEA/AURICULARES XAEA 2.png", "catalogo/Auriculares/AURICULARES XAEA/AURICULARES XAEA 3.png", "catalogo/Auriculares/AURICULARES XAEA/AURICULARES XAEA 4.png"]'
+            >
+              Ver Detalles
+            </button>
+            <button
+              class="btn add-to-cart-btn"
+              data-product-id="auri11"
+              data-product-name="Auriculares XAEA"
+                data-product-price="60620"
+              data-product-code="AURI011"
+              data-product-image="catalogo/Auriculares/AURICULARES XAEA/AURICULARES XAEA 1.png"
+            >
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- aurcular jk603 pro -->
+        <div
+          class="product-card"
+          data-category="auriculares"
+          data-id="auri12"
+          data-product-code="AURI012"
+        >
+          <div class="product-image">
+            <img
+              src="./catalogo/Auriculares/aurcular jk603 pro/aurcular jk603 pro 1.png"
+              alt="Auricular JK603 Pro"
+            />
+          </div>
+          <h3>Auricular JK603 Pro</h3>
+          <p>Auriculares profesionales con sonido de alta definición y comodidad ergonómica</p>
+          <div class="product-details">
+              <div class="product-price"><strong>$8,700</strong></div>
+          </div>
+          <div class="product-actions">
+            <button
+              class="btn view-product-btn"
+              data-product-id="auri12"
+              data-product-name="Auricular JK603 Pro"
+                data-product-price="8700"
+              data-product-description="Auriculares profesionales JK603 Pro con sonido de alta definición, micrófono integrado y diseño ergonómico para uso prolongado."
+              data-product-images='["./catalogo/Auriculares/aurcular jk603 pro/aurcular jk603 pro 1.png", "./catalogo/Auriculares/aurcular jk603 pro/aurcular jk603 pro 2.png"]'
+            >
+              Ver Detalles
+            </button>
+            <button
+              class="btn add-to-cart-btn"
+              data-product-id="auri12"
+              data-product-name="Auricular JK603 Pro"
+                data-product-price="8700"
+              data-product-code="AURI012"
+              data-product-image="./catalogo/Auriculares/aurcular jk603 pro/aurcular jk603 pro 1.png"
+            >
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- AURICULAR VINCHA AU-12016 -->
+        <div
+          class="product-card"
+          data-category="auriculares"
+          data-id="auri13"
+          data-product-code="AURI013"
+        >
+          <div class="product-image">
+            <img
+              src="./catalogo/Auriculares/Auriculares  VINCHA AU-12016/Auriculares  VINCHA AU-12016 1.png"
+              alt="Auricular Vincha AU-12016"
+            />
+          </div>
+          <h3>Auricular Vincha AU-12016</h3>
+          <p>Auriculares over-ear con diadema ajustable y sonido equilibrado</p>
+          <div class="product-details">
+              <div class="product-price"><strong>$24,780</strong></div>
+          </div>
+          <div class="product-actions">
+            <button
+              class="btn view-product-btn"
+              data-product-id="auri13"
+              data-product-name="Auricular Vincha AU-12016"
+                data-product-price="24780"
+              data-product-description="Auriculares over-ear con diadema ajustable, almohadillas cómodas y sonido equilibrado para largas sesiones de escucha."
+              data-product-images='["./catalogo/Auriculares/Auriculares  VINCHA AU-12016/Auriculares  VINCHA AU-12016 1.png", "./catalogo/Auriculares/Auriculares  VINCHA AU-12016/Auriculares  VINCHA AU-12016 2.png"]'
+            >
+              Ver Detalles
+            </button>
+            <button
+              class="btn add-to-cart-btn"
+              data-product-id="auri13"
+              data-product-name="Auricular Vincha AU-12016"
+                data-product-price="24780"
+              data-product-code="AURI013"
+              data-product-image="./catalogo/Auriculares/Auriculares  VINCHA AU-12016/Auriculares  VINCHA AU-12016 1.png"
+            >
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Auriculares Gamer Trust GXT 307 -->
+        <div
+          class="product-card"
+          data-category="auriculares"
+          data-id="auri14"
+          data-product-code="AURI014"
+        >
+          <div class="product-image">
+            <img
+              src="catalogo/Auriculares/Auriculares Gamer Trust GXT 307/Auriculares Gamer Trust GXT 307 1.png"
+              alt="Auriculares Gamer Trust GXT 307"
+            />
+          </div>
+          <h3>Auriculares Gamer Trust GXT 307</h3>
+          <p>Auriculares para gaming con micrófono y sonido surround</p>
+          <div class="product-details">
+              <div class="product-price"><strong>$41,800</strong></div>
+          </div>
+          <div class="product-actions">
+            <button
+              class="btn view-product-btn"
+              data-product-id="auri14"
+              data-product-name="Auriculares Gamer Trust GXT 307"
+                data-product-price="41800"
+              data-product-description="Auriculares para gaming Trust GXT 307 con micrófono flexible, sonido surround virtual y almohadillas cómodas para sesiones largas de juego."
+              data-product-images='["catalogo/Auriculares/Auriculares Gamer Trust GXT 307/Auriculares Gamer Trust GXT 307 1.png", "catalogo/Auriculares/Auriculares Gamer Trust GXT 307/Auriculares Gamer Trust GXT 307 2.png", "catalogo/Auriculares/Auriculares Gamer Trust GXT 307/Auriculares Gamer Trust GXT 307 3.png"]'
+            >
+              Ver Detalles
+            </button>
+            <button
+              class="btn add-to-cart-btn"
+              data-product-id="auri14"
+              data-product-name="Auriculares Gamer Trust GXT 307"
+                data-product-price="41800"
+              data-product-code="AURI014"
+              data-product-image="catalogo/Auriculares/Auriculares Gamer Trust GXT 307/Auriculares Gamer Trust GXT 307 1.png"
+            >
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Auriculares Gamer Trust Radius -->
+        <div
+          class="product-card"
+          data-category="auriculares"
+          data-id="auri15"
+          data-product-code="AURI015"
+        >
+          <div class="product-image">
+            <img
+              src="catalogo/Auriculares/Auriculares Gamer Trust Radius/Auriculares Gamer Trust Radius 1.png"
+              alt="Auriculares Gamer Trust Radius"
+            />
+          </div>
+          <h3>Auriculares Gamer Trust Radius</h3>
+          <p>Auriculares gaming con iluminación RGB y control de volumen</p>
+          <div class="product-details">
+              <div class="product-price"><strong>$41,900</strong></div>
+          </div>
+          <div class="product-actions">
+            <button
+              class="btn view-product-btn"
+              data-product-id="auri15"
+              data-product-name="Auriculares Gamer Trust Radius"
+                data-product-price="41900"
+              data-product-description="Auriculares gaming Trust Radius con iluminación RGB, micrófono desmontable y control de volumen en el cable. Sonido potente para inmersión total."
+              data-product-images='["catalogo/Auriculares/Auriculares Gamer Trust Radius/Auriculares Gamer Trust Radius 1.png", "catalogo/Auriculares/Auriculares Gamer Trust Radius/Auriculares Gamer Trust Radius 2.png"]'
+            >
+              Ver Detalles
+            </button>
+            <button
+              class="btn add-to-cart-btn"
+              data-product-id="auri15"
+              data-product-name="Auriculares Gamer Trust Radius"
+                data-product-price="41900"
+              data-product-code="AURI015"
+              data-product-image="catalogo/Auriculares/Auriculares Gamer Trust Radius/Auriculares Gamer Trust Radius 1.png"
+            >
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Auriculares infantil con diseño -->
+        <div
+          class="product-card"
+          data-category="auriculares"
+          data-id="auri16"
+          data-product-code="AURI016"
+        >
+          <div class="product-image">
+            <img
+              src="catalogo/Auriculares/Auriculares infantil con diseño/Auriculares infantil con diseño 1.png"
+              alt="Auriculares Infantil con Diseño"
+            />
+          </div>
+          <h3>Auriculares Infantil con Diseño</h3>
+          <p>Auriculares para niños con diseños divertidos y limitador de volumen</p>
+          <div class="product-details">
+              <div class="product-price"><strong>$3,100</strong></div>
+          </div>
+          <div class="product-actions">
+            <button
+              class="btn view-product-btn"
+              data-product-id="auri16"
+              data-product-name="Auriculares Infantil con Diseño"
+                data-product-price="3100"
+              data-product-description="Auriculares para niños con diseños coloridos y divertidos. Incluye limitador de volumen para proteger la audición infantil. Cómodos y duraderos."
+              data-product-images='["catalogo/Auriculares/Auriculares infantil con diseño/Auriculares infantil con diseño 1.png", "catalogo/Auriculares/Auriculares infantil con diseño/Auriculares infantil con diseño 2.png", "catalogo/Auriculares/Auriculares infantil con diseño/Auriculares infantil con diseño 3.png", "catalogo/Auriculares/Auriculares infantil con diseño/Auriculares infantil con diseño 4.png", "catalogo/Auriculares/Auriculares infantil con diseño/Auriculares infantil con diseño 5.png", "catalogo/Auriculares/Auriculares infantil con diseño/Auriculares infantil con diseño 6.png"]'
+            >
+              Ver Detalles
+            </button>
+            <button
+              class="btn add-to-cart-btn"
+              data-product-id="auri16"
+              data-product-name="Auriculares Infantil con Diseño"
+                data-product-price="3100"
+              data-product-code="AURI016"
+              data-product-image="catalogo/Auriculares/Auriculares infantil con diseño/Auriculares infantil con diseño 1.png"
+            >
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- auriculares m10 -->
+        <div
+          class="product-card"
+          data-category="auriculares"
+          data-id="auri17"
+          data-product-code="AURI017"
+        >
+          <div class="product-image">
+            <img
+              src="catalogo/Auriculares/auriculares m10/auriculares m10 1.png"
+              alt="Auriculares M10"
+            />
+          </div>
+          <h3>Auriculares M10</h3>
+          <p>Auriculares inalámbricos M10 con estuche de carga y control táctil</p>
+          <div class="product-details">
+              <div class="product-price"><strong>$8,900</strong></div>
+          </div>
+          <div class="product-actions">
+            <button
+              class="btn view-product-btn"
+              data-product-id="auri17"
+              data-product-name="Auriculares M10"
+                data-product-price="8900"
+              data-product-description="Auriculares inalámbricos M10 con estuche de carga portátil, control táctil y resistencia al agua IPX5. Sonido claro y bajos potentes."
+              data-product-images='["catalogo/Auriculares/auriculares m10/auriculares m10 1.png", "catalogo/Auriculares/auriculares m10/auriculares m10 2.png", "catalogo/Auriculares/auriculares m10/auriculares m10 3.png"]'
+            >
+              Ver Detalles
+            </button>
+            <button
+              class="btn add-to-cart-btn"
+              data-product-id="auri17"
+              data-product-name="Auriculares M10"
+                data-product-price="8900"
+              data-product-code="AURI017"
+              data-product-image="catalogo/Auriculares/auriculares m10/auriculares m10 1.png"
+            >
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Auriculares sin Gomita ONLY -->
+        <div
+          class="product-card"
+          data-category="auriculares"
+          data-id="auri18"
+          data-product-code="AURI018"
+        >
+          <div class="product-image">
+            <img
+              src="catalogo/Auriculares/Auriculares sin Gomita ONLY/Auriculares sin Gomita ONLY 1.png"
+              alt="Auriculares sin Gomita ONLY"
+            />
+          </div>
+          <h3>Auriculares sin Gomita ONLY</h3>
+          <p>Auriculares sin almohadillas de goma, diseño minimalista</p>
+          <div class="product-details">
+              <div class="product-price"><strong>$2,300</strong></div>
+          </div>
+          <div class="product-actions">
+            <button
+              class="btn view-product-btn"
+              data-product-id="auri18"
+              data-product-name="Auriculares sin Gomita ONLY"
+                data-product-price="2300"
+              data-product-description="Auriculares sin almohadillas de goma, diseño minimalista y ligero. Ideal para usuarios que prefieren un ajuste sin gomas."
+              data-product-images='["catalogo/Auriculares/Auriculares sin Gomita ONLY/Auriculares sin Gomita ONLY 1.png", "catalogo/Auriculares/Auriculares sin Gomita ONLY/Auriculares sin Gomita ONLY 2.png", "catalogo/Auriculares/Auriculares sin Gomita ONLY/Auriculares sin Gomita ONLY 3.png", "catalogo/Auriculares/Auriculares sin Gomita ONLY/Auriculares sin Gomita ONLY 4.png"]'
+            >
+              Ver Detalles
+            </button>
+            <button
+              class="btn add-to-cart-btn"
+              data-product-id="auri18"
+              data-product-name="Auriculares sin Gomita ONLY"
+                data-product-price="2300"
+              data-product-code="AURI018"
+              data-product-image="catalogo/Auriculares/Auriculares sin Gomita ONLY/Auriculares sin Gomita ONLY 1.png"
+            >
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Auriculares Tipo C XAEA -->
+        <div
+          class="product-card"
+          data-category="auriculares"
+          data-id="auri19"
+          data-product-code="AURI019"
+        >
+          <div class="product-image">
+            <img
+              src="catalogo/Auriculares/Auriculares Tipo C XAEA/Auriculares Tipo C XAEA 1.png"
+              alt="Auriculares Tipo C XAEA"
+            />
+          </div>
+          <h3>Auriculares Tipo C XAEA</h3>
+          <p>Auriculares con conector USB Tipo C para dispositivos modernos</p>
+          <div class="product-details">
+              <div class="product-price"><strong>$5,300</strong></div>
+          </div>
+          <div class="product-actions">
+            <button
+              class="btn view-product-btn"
+              data-product-id="auri19"
+              data-product-name="Auriculares Tipo C XAEA"
+                data-product-price="5300"
+              data-product-description="Auriculares con conector USB Tipo C, compatibles con smartphones y laptops modernos. Sonido de calidad y micrófono integrado."
+              data-product-images='["catalogo/Auriculares/Auriculares Tipo C XAEA/Auriculares Tipo C XAEA 1.png", "catalogo/Auriculares/Auriculares Tipo C XAEA/Auriculares Tipo C XAEA 2.png", "catalogo/Auriculares/Auriculares Tipo C XAEA/Auriculares Tipo C XAEA 3.png"]'
+            >
+              Ver Detalles
+            </button>
+            <button
+              class="btn add-to-cart-btn"
+              data-product-id="auri19"
+              data-product-name="Auriculares Tipo C XAEA"
+                data-product-price="5300"
+              data-product-code="AURI019"
+              data-product-image="catalogo/Auriculares/Auriculares Tipo C XAEA/Auriculares Tipo C XAEA 1.png"
+            >
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Auriculares vincha Bluetooth orejas RGB -->
+        <div
+          class="product-card"
+          data-category="auriculares"
+          data-id="auri20"
+          data-product-code="AURI020"
+        >
+          <div class="product-image">
+            <img
+              src="catalogo/Auriculares/Auriculares vincha Bluetooth orejas RGB/Auriculares vincha Bluetooth orejas RGB.png"
+              alt="Auriculares Vincha Bluetooth Orejas RGB"
+            />
+          </div>
+          <h3>Auriculares Vincha Bluetooth Orejas RGB</h3>
+          <p>Auriculares over-ear Bluetooth con iluminación RGB en las orejas</p>
+          <div class="product-details">
+              <div class="product-price"><strong>$10,100</strong></div>
+          </div>
+          <div class="product-actions">
+            <button
+              class="btn view-product-btn"
+              data-product-id="auri20"
+              data-product-name="Auriculares Vincha Bluetooth Orejas RGB"
+                data-product-price="10100"
+              data-product-description="Auriculares over-ear Bluetooth con iluminación RGB en las copas. Sonido inmersivo, batería de larga duración y micrófono para llamadas."
+              data-product-images='["catalogo/Auriculares/Auriculares vincha Bluetooth orejas RGB/Auriculares vincha Bluetooth orejas RGB.png"]'
+            >
+              Ver Detalles
+            </button>
+            <button
+              class="btn add-to-cart-btn"
+              data-product-id="auri20"
+              data-product-name="Auriculares Vincha Bluetooth Orejas RGB"
+                data-product-price="10100"
+              data-product-code="AURI020"
+              data-product-image="catalogo/Auriculares/Auriculares vincha Bluetooth orejas RGB/Auriculares vincha Bluetooth orejas RGB.png"
+            >
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Auriculares vincha Bluetooth P47 -->
+        <div
+          class="product-card"
+          data-category="auriculares"
+          data-id="auri21"
+          data-product-code="AURI021"
+        >
+          <div class="product-image">
+            <img
+              src="catalogo/Auriculares/Auriculares vincha Bluetooth P47/Auriculares vincha Bluetooth P47.png"
+              alt="Auriculares Vincha Bluetooth P47"
+            />
+          </div>
+          <h3>Auriculares Vincha Bluetooth P47</h3>
+          <p>Auriculares Bluetooth over-ear modelo P47 con radio FM integrada</p>
+          <div class="product-details">
+              <div class="product-price"><strong>$7,900</strong></div>
+          </div>
+          <div class="product-actions">
+            <button
+              class="btn view-product-btn"
+              data-product-id="auri21"
+              data-product-name="Auriculares Vincha Bluetooth P47"
+                data-product-price="7900"
+              data-product-description="Auriculares Bluetooth over-ear P47 con radio FM integrada, ranura para tarjeta SD y diseño plegable para portabilidad."
+              data-product-images='["catalogo/Auriculares/Auriculares vincha Bluetooth P47/Auriculares vincha Bluetooth P47.png"]'
+            >
+              Ver Detalles
+            </button>
+            <button
+              class="btn add-to-cart-btn"
+              data-product-id="auri21"
+              data-product-name="Auriculares Vincha Bluetooth P47"
+                data-product-price="7900"
+              data-product-code="AURI021"
+              data-product-image="catalogo/Auriculares/Auriculares vincha Bluetooth P47/Auriculares vincha Bluetooth P47.png"
+            >
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Auriculares Vincha Bluetooth Pro max -->
+        <div
+          class="product-card"
+          data-category="auriculares"
+          data-id="auri22"
+          data-product-code="AURI022"
+        >
+          <div class="product-image">
+            <img
+              src="catalogo/Auriculares/Auriculares Vincha Bluetooth Pro max/Auriculares Vincha Bluetooth Pro max.png"
+              alt="Auriculares Vincha Bluetooth Pro Max"
+            />
+          </div>
+          <h3>Auriculares Vincha Bluetooth Pro Max</h3>
+          <p>Auriculares Bluetooth premium over-ear con cancelación de ruido</p>
+          <div class="product-details">
+              <div class="product-price"><strong>$11,200</strong></div>
+          </div>
+          <div class="product-actions">
+            <button
+              class="btn view-product-btn"
+              data-product-id="auri22"
+              data-product-name="Auriculares Vincha Bluetooth Pro Max"
+                data-product-price="11200"
+              data-product-description="Auriculares Bluetooth premium over-ear Pro Max con cancelación de ruido activa, sonido de alta resolución y batería de hasta 30 horas."
+              data-product-images='["catalogo/Auriculares/Auriculares Vincha Bluetooth Pro max/Auriculares Vincha Bluetooth Pro max.png"]'
+            >
+              Ver Detalles
+            </button>
+            <button
+              class="btn add-to-cart-btn"
+              data-product-id="auri22"
+              data-product-name="Auriculares Vincha Bluetooth Pro Max"
+                data-product-price="11200"
+              data-product-code="AURI022"
+              data-product-image="catalogo/Auriculares/Auriculares Vincha Bluetooth Pro max/Auriculares Vincha Bluetooth Pro max.png"
+            >
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- AURICULARESF10 GAMER PRO -->
+        <div
+          class="product-card"
+          data-category="auriculares"
+          data-id="auri23"
+          data-product-code="AURI023"
+        >
+          <div class="product-image">
+            <img
+              src="catalogo/Auriculares/AURICULARESF10 GAMER PRO/AURICULARESF10 GAMER PRO 1.png"
+              alt="Auriculares F10 Gamer Pro"
+            />
+          </div>
+          <h3>Auriculares F10 Gamer Pro</h3>
+          <p>Auriculares gaming profesionales con sonido 7.1 y micrófono desmontable</p>
+          <div class="product-details">
+              <div class="product-price"><strong>$12,800</strong></div>
+          </div>
+          <div class="product-actions">
+            <button
+              class="btn view-product-btn"
+              data-product-id="auri23"
+              data-product-name="Auriculares F10 Gamer Pro"
+                data-product-price="12800"
+              data-product-description="Auriculares gaming profesionales F10 con sonido surround 7.1, micrófono desmontable y compatibilidad multiplataforma."
+              data-product-images='["catalogo/Auriculares/AURICULARESF10 GAMER PRO/AURICULARESF10 GAMER PRO 1.png", "catalogo/Auriculares/AURICULARESF10 GAMER PRO/AURICULARESF10 GAMER PRO 2.png", "catalogo/Auriculares/AURICULARESF10 GAMER PRO/AURICULARESF10 GAMER PRO 3.png", "catalogo/Auriculares/AURICULARESF10 GAMER PRO/AURICULARESF10 GAMER PRO 4.png"]'
+            >
+              Ver Detalles
+            </button>
+            <button
+              class="btn add-to-cart-btn"
+              data-product-id="auri23"
+              data-product-name="Auriculares F10 Gamer Pro"
+                data-product-price="12800"
+              data-product-code="AURI023"
+              data-product-image="catalogo/Auriculares/AURICULARESF10 GAMER PRO/AURICULARESF10 GAMER PRO 1.png"
+            >
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Manos libres auricular -->
+        <div
+          class="product-card"
+          data-category="auriculares"
+          data-id="auri24"
+          data-product-code="AURI024"
+        >
+          <div class="product-image">
+            <img
+              src="./catalogo/Auriculares/Manos libres auricular/Manos libres auricular.webp"
+              alt="Manos Libres Auricular"
+            />
+          </div>
+          <h3>Manos Libres Auricular</h3>
+          <p>Auricular manos libres para llamadas con micrófono integrado</p>
+          <div class="product-details">
+              <div class="product-price"><strong>$3,500</strong></div>
+          </div>
+          <div class="product-actions">
+            <button
+              class="btn view-product-btn"
+              data-product-id="auri24"
+              data-product-name="Manos Libres Auricular"
+                data-product-price="3500"
+              data-product-description="Auricular manos libres con micrófono integrado, ideal para llamadas mientras conduces o trabajas. Conexión Bluetooth estable."
+              data-product-images='["./catalogo/Auriculares/Manos libres auricular/Manos libres auricular.webp"]'
+            >
+              Ver Detalles
+            </button>
+            <button
+              class="btn add-to-cart-btn"
+              data-product-id="auri24"
+              data-product-name="Manos Libres Auricular"
+                data-product-price="3500"
+              data-product-code="AURI024"
+              data-product-image="./catalogo/Auriculares/Manos libres auricular/Manos libres auricular.webp"
+            >
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Barra de Sonido Blik 24W -->
+        <div class="product-card" data-category="parlantes" data-id="parl1" data-product-code="PARL001">
+          <div class="product-image">
+            <img src="./catalogo/parlantes/Barra de Sonido Blik 24W/Barra de Sonido Blik 24W 1.png" alt="Barra de Sonido Blik 24W" />
+          </div>
+          <h3>Barra de Sonido Blik 24W</h3>
+          <p>Barra de sonido con 24W de potencia y conexión Bluetooth.</p>
+          <div class="product-details">
+            <div class="product-price"><strong>$109.900</strong></div>
+          </div>
+          <div class="product-actions">
+            <button class="btn view-product-btn" data-product-id="parl1" data-product-name="Barra de Sonido Blik 24W" data-product-price="109900" data-product-description="Barra de sonido Blik de 24W con conexión Bluetooth, ideal para mejorar el sonido de tu TV o PC, con control remoto y múltiples modos de audio." data-product-images='["./catalogo/parlantes/Barra de Sonido Blik 24W/Barra de Sonido Blik 24W 1.png", "./catalogo/parlantes/Barra de Sonido Blik 24W/Barra de Sonido Blik 24W 2.png", "./catalogo/parlantes/Barra de Sonido Blik 24W/Barra de Sonido Blik 24W 3.png", "./catalogo/parlantes/Barra de Sonido Blik 24W/Barra de Sonido Blik 24W 4.png", "./catalogo/parlantes/Barra de Sonido Blik 24W/Barra de Sonido Blik 24W 5.png"]'>
+              Ver Detalles
+            </button>
+            <button class="btn add-to-cart-btn" data-product-id="parl1" data-product-name="Barra de Sonido Blik 24W" data-product-price="109900" data-product-code="PARL001" data-product-image="./catalogo/parlantes/Barra de Sonido Blik 24W/Barra de Sonido Blik 24W 1.png">
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Barra de Sonido Flaming RGB -->
+        <div class="product-card" data-category="parlantes" data-id="parl2" data-product-code="PARL002">
+          <div class="product-image">
+            <img src="./catalogo/parlantes/Barra de Sonido Flaming RGB/Barra de Sonido Flaming RGB 1.png" alt="Barra de Sonido Flaming RGB" />
+          </div>
+          <h3>Barra de Sonido Flaming RGB</h3>
+          <p>Barra de sonido con iluminación RGB y sonido inmersivo.</p>
+          <div class="product-details">
+            <div class="product-price"><strong>$54.950</strong></div>
+          </div>
+          <div class="product-actions">
+            <button class="btn view-product-btn" data-product-id="parl2" data-product-name="Barra de Sonido Flaming RGB" data-product-price="54950" data-product-description="Barra de sonido Flaming con iluminación RGB personalizable, potencia de sonido alta y conexiones múltiples para una experiencia gaming inmersiva." data-product-images='["./catalogo/parlantes/Barra de Sonido Flaming RGB/Barra de Sonido Flaming RGB 1.png", "./catalogo/parlantes/Barra de Sonido Flaming RGB/Barra de Sonido Flaming RGB 2.png"]'>
+              Ver Detalles
+            </button>
+            <button class="btn add-to-cart-btn" data-product-id="parl2" data-product-name="Barra de Sonido Flaming RGB" data-product-price="54950" data-product-code="PARL002" data-product-image="./catalogo/parlantes/Barra de Sonido Flaming RGB/Barra de Sonido Flaming RGB 1.png">
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Foco Parlante Bluetooth -->
+        <div class="product-card" data-category="parlantes" data-id="parl3" data-product-code="PARL003">
+          <div class="product-image">
+            <img src="./catalogo/parlantes/Foco parlante Bluetooth/Foco parlante Bluetooth.png" alt="Foco Parlante Bluetooth" />
+          </div>
+          <h3>Foco Parlante Bluetooth</h3>
+          <p>Foco LED con parlante Bluetooth integrado.</p>
+          <div class="product-details">
+            <div class="product-price"><strong>$8.125</strong></div>
+          </div>
+          <div class="product-actions">
+            <button class="btn view-product-btn" data-product-id="parl3" data-product-name="Foco Parlante Bluetooth" data-product-price="8125" data-product-description="Foco LED con parlante Bluetooth integrado, cambia de color y reproduce música desde tu dispositivo." data-product-images='["./catalogo/parlantes/Foco parlante Bluetooth/Foco parlante Bluetooth.png"]'>
+              Ver Detalles
+            </button>
+            <button class="btn add-to-cart-btn" data-product-id="parl3" data-product-name="Foco Parlante Bluetooth" data-product-price="8125" data-product-code="PARL003" data-product-image="./catalogo/parlantes/Foco parlante Bluetooth/Foco parlante Bluetooth.png">
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Lámpara Parlante 4 en 1 -->
+        <div class="product-card" data-category="parlantes" data-id="parl4" data-product-code="PARL004">
+          <div class="product-image">
+            <img src="./catalogo/parlantes/Lámpara Parlante 4 en 1/Lámpara Parlante  1.png" alt="Lámpara Parlante 4 en 1" />
+          </div>
+          <h3>Lámpara Parlante 4 en 1</h3>
+          <p>Lámpara multifunción con parlante, cargador y más.</p>
+          <div class="product-details">
+            <div class="product-price"><strong>$32.890</strong></div>
+          </div>
+          <div class="product-actions">
+            <button class="btn view-product-btn" data-product-id="parl4" data-product-name="Lámpara Parlante 4 en 1" data-product-price="32890" data-product-description="Lámpara 4 en 1 con parlante Bluetooth, cargador inalámbrico, luz nocturna y reloj despertador." data-product-images='["./catalogo/parlantes/Lámpara Parlante 4 en 1/Lámpara Parlante  1.png", "./catalogo/parlantes/Lámpara Parlante 4 en 1/Lámpara Parlante 2.png", "./catalogo/parlantes/Lámpara Parlante 4 en 1/Lámpara Parlante 3.png"]'>
+              Ver Detalles
+            </button>
+            <button class="btn add-to-cart-btn" data-product-id="parl4" data-product-name="Lámpara Parlante 4 en 1" data-product-price="32890" data-product-code="PARL004" data-product-image="./catalogo/parlantes/Lámpara Parlante 4 en 1/Lámpara Parlante  1.png">
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Parlante Bluetooth Micro2 -->
+        <div class="product-card" data-category="parlantes" data-id="parl5" data-product-code="PARL005">
+          <div class="product-image">
+            <img src="./catalogo/parlantes/Parlante Bluetooth  micro2/Parlante Bluetooth  micro2.png" alt="Parlante Bluetooth Micro2" />
+          </div>
+          <h3>Parlante Bluetooth Micro2</h3>
+          <p>Parlante Bluetooth compacto y portátil.</p>
+          <div class="product-details">
+            <div class="product-price"><strong>$9.300</strong></div>
+          </div>
+          <div class="product-actions">
+            <button class="btn view-product-btn" data-product-id="parl5" data-product-name="Parlante Bluetooth Micro2" data-product-price="9300" data-product-description="Parlante Bluetooth compacto Micro2 con sonido claro y batería de larga duración, ideal para viajes." data-product-images='["./catalogo/parlantes/Parlante Bluetooth  micro2/Parlante Bluetooth  micro2.png"]'>
+              Ver Detalles
+            </button>
+            <button class="btn add-to-cart-btn" data-product-id="parl5" data-product-name="Parlante Bluetooth Micro2" data-product-price="9300" data-product-code="PARL005" data-product-image="./catalogo/parlantes/Parlante Bluetooth  micro2/Parlante Bluetooth  micro2.png">
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Parlante Bluetooth + Mic -->
+        <div class="product-card" data-category="parlantes" data-id="parl6" data-product-code="PARL006">
+          <div class="product-image">
+            <img src="./catalogo/parlantes/Parlante Bluetooth + Mic/Parlante Bluetooth + Mic inalambrico.png" alt="Parlante Bluetooth + Mic" />
+          </div>
+          <h3>Parlante Bluetooth + Mic</h3>
+          <p>Parlante Bluetooth con micrófono integrado para llamadas.</p>
+          <div class="product-details">
+            <div class="product-price"><strong>$12.350</strong></div>
+          </div>
+          <div class="product-actions">
+            <button class="btn view-product-btn" data-product-id="parl6" data-product-name="Parlante Bluetooth + Mic" data-product-price="12350" data-product-description="Parlante Bluetooth con micrófono integrado para llamadas manos libres y reproducción de música." data-product-images='["./catalogo/parlantes/Parlante Bluetooth + Mic/Parlante Bluetooth + Mic inalambrico.png"]'>
+              Ver Detalles
+            </button>
+            <button class="btn add-to-cart-btn" data-product-id="parl6" data-product-name="Parlante Bluetooth + Mic" data-product-price="12350" data-product-code="PARL006" data-product-image="./catalogo/parlantes/Parlante Bluetooth + Mic/Parlante Bluetooth + Mic inalambrico.png">
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Parlante Bluetooth 10 -->
+        <div class="product-card" data-category="parlantes" data-id="parl7" data-product-code="PARL007">
+          <div class="product-image">
+            <img src="./catalogo/parlantes/Parlante Bluetooth 10/Parlante Bluetooth 10 1.png" alt="Parlante Bluetooth 10" />
+          </div>
+          <h3>Parlante Bluetooth 10</h3>
+          <p>Parlante Bluetooth de 10 pulgadas con bajos potentes.</p>
+          <div class="product-details">
+            <div class="product-price"><strong>$94.900</strong></div>
+          </div>
+          <div class="product-actions">
+            <button class="btn view-product-btn" data-product-id="parl7" data-product-name="Parlante Bluetooth 10" data-product-price="94900" data-product-description="Parlante Bluetooth de 10 pulgadas con bajos potentes, batería recargable y luces LED." data-product-images='["./catalogo/parlantes/Parlante Bluetooth 10/Parlante Bluetooth 10 1.png", "./catalogo/parlantes/Parlante Bluetooth 10/Parlante Bluetooth 10 2.png", "./catalogo/parlantes/Parlante Bluetooth 10/Parlante Bluetooth 10 3.png"]'>
+              Ver Detalles
+            </button>
+            <button class="btn add-to-cart-btn" data-product-id="parl7" data-product-name="Parlante Bluetooth 10" data-product-price="94900" data-product-code="PARL007" data-product-image="./catalogo/parlantes/Parlante Bluetooth 10/Parlante Bluetooth 10 1.png">
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Parlante Bluetooth 3 -->
+        <div class="product-card" data-category="parlantes" data-id="parl8" data-product-code="PARL008">
+          <div class="product-image">
+            <img src="./catalogo/parlantes/Parlante Bluetooth 3/Parlante Bluetooth 3 1.png" alt="Parlante Bluetooth 3" />
+          </div>
+          <h3>Parlante Bluetooth 3</h3>
+          <p>Parlante Bluetooth compacto disponible en varios colores.</p>
+          <div class="product-details">
+            <div class="product-price"><strong>$10.400</strong></div>
+          </div>
+          <div class="product-actions">
+            <button class="btn view-product-btn" data-product-id="parl8" data-product-name="Parlante Bluetooth 3" data-product-price="10400" data-product-description="Parlante Bluetooth compacto disponible en colores azul, negro, rojo y more, con sonido claro y portabilidad." data-product-images='["./catalogo/parlantes/Parlante Bluetooth 3/Parlante Bluetooth  azul.png", "./catalogo/parlantes/Parlante Bluetooth 3/Parlante Bluetooth 3 1.png", "./catalogo/parlantes/Parlante Bluetooth 3/Parlante Bluetooth negro.png", "./catalogo/parlantes/Parlante Bluetooth 3/Parlante Bluetooth only.png", "./catalogo/parlantes/Parlante Bluetooth 3/Parlante Bluetooth rojo.png"]'>
+              Ver Detalles
+            </button>
+            <button class="btn add-to-cart-btn" data-product-id="parl8" data-product-name="Parlante Bluetooth 3" data-product-price="10400" data-product-code="PARL008" data-product-image="./catalogo/parlantes/Parlante Bluetooth 3/Parlante Bluetooth 3 1.png">
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Parlante Bluetooth 4 2 + Micrófono -->
+        <div class="product-card" data-category="parlantes" data-id="parl9" data-product-code="PARL009">
+          <div class="product-image">
+            <img src="./catalogo/parlantes/Parlante Bluetooth 4 2 + Micrófono/Parlante Bluetooth 4 2 + Micrófono.png" alt="Parlante Bluetooth 4 2 + Micrófono" />
+          </div>
+          <h3>Parlante Bluetooth 4 2 + Micrófono</h3>
+          <p>Parlante Bluetooth con micrófono para karaoke.</p>
+          <div class="product-details">
+            <div class="product-price"><strong>$38.800</strong></div>
+          </div>
+          <div class="product-actions">
+            <button class="btn view-product-btn" data-product-id="parl9" data-product-name="Parlante Bluetooth 4 2 + Micrófono" data-product-price="38800" data-product-description="Parlante Bluetooth 4.2 con micrófono incluido, perfecto para karaoke y fiestas." data-product-images='["./catalogo/parlantes/Parlante Bluetooth 4 2 + Micrófono/Parlante Bluetooth 4 2 + Micrófono.png"]'>
+              Ver Detalles
+            </button>
+            <button class="btn add-to-cart-btn" data-product-id="parl9" data-product-name="Parlante Bluetooth 4 2 + Micrófono" data-product-price="38800" data-product-code="PARL009" data-product-image="./catalogo/parlantes/Parlante Bluetooth 4 2 + Micrófono/Parlante Bluetooth 4 2 + Micrófono.png">
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Parlante Bluetooth 6.5 -->
+        <div class="product-card" data-category="parlantes" data-id="parl10" data-product-code="PARL010">
+          <div class="product-image">
+            <img src="./catalogo/parlantes/Parlante Bluetooth 6.5/Parlante Bluetooth 6,5 + Mic.png" alt="Parlante Bluetooth 6.5" />
+          </div>
+          <h3>Parlante Bluetooth 6.5</h3>
+          <p>Parlante Bluetooth de 6.5 pulgadas con micrófono.</p>
+          <div class="product-details">
+            <div class="product-price"><strong>$37.750</strong></div>
+          </div>
+          <div class="product-actions">
+            <button class="btn view-product-btn" data-product-id="parl10" data-product-name="Parlante Bluetooth 6.5" data-product-price="37750" data-product-description="Parlante Bluetooth de 6.5 pulgadas con micrófono, ideal para eventos pequeños y música en movimiento." data-product-images='["./catalogo/parlantes/Parlante Bluetooth 6.5/Parlante Bluetooth 6,5 + Mic.png"]'>
+              Ver Detalles
+            </button>
+            <button class="btn add-to-cart-btn" data-product-id="parl10" data-product-name="Parlante Bluetooth 6.5" data-product-price="37750" data-product-code="PARL010" data-product-image="./catalogo/parlantes/Parlante Bluetooth 6.5/Parlante Bluetooth 6,5 + Mic.png">
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Parlante Bluetooth 8 con Mic -->
+        <div class="product-card" data-category="parlantes" data-id="parl11" data-product-code="PARL011">
+          <div class="product-image">
+            <img src="./catalogo/parlantes/Parlante Bluetooth 8 con Mic/Parlante Bluetooth 8 con Mic.png" alt="Parlante Bluetooth 8 con Mic" />
+          </div>
+          <h3>Parlante Bluetooth 8 con Mic</h3>
+          <p>Parlante Bluetooth de 8 pulgadas con micrófono.</p>
+          <div class="product-details">
+            <div class="product-price"><strong>$52.500</strong></div>
+          </div>
+          <div class="product-actions">
+            <button class="btn view-product-btn" data-product-id="parl11" data-product-name="Parlante Bluetooth 8 con Mic" data-product-price="52500" data-product-description="Parlante Bluetooth de 8 pulgadas con micrófono, perfecto para fiestas y eventos al aire libre." data-product-images='["./catalogo/parlantes/Parlante Bluetooth 8 con Mic/Parlante Bluetooth 8 con Mic.png"]'>
+              Ver Detalles
+            </button>
+            <button class="btn add-to-cart-btn" data-product-id="parl11" data-product-name="Parlante Bluetooth 8 con Mic" data-product-price="52500" data-product-code="PARL011" data-product-image="./catalogo/parlantes/Parlante Bluetooth 8 con Mic/Parlante Bluetooth 8 con Mic.png">
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Parlante Bluetooth 9 con Mic -->
+        <div class="product-card" data-category="parlantes" data-id="parl12" data-product-code="PARL012">
+          <div class="product-image">
+            <img src="./catalogo/parlantes/Parlante Bluetooth 9 con Mic/Parlante Bluetooth 9 con Mic 1.png" alt="Parlante Bluetooth 9 con Mic" />
+          </div>
+          <h3>Parlante Bluetooth 9 con Mic</h3>
+          <p>Parlante Bluetooth de 9 pulgadas con micrófono.</p>
+          <div class="product-details">
+            <div class="product-price"><strong>$74.100</strong></div>
+          </div>
+          <div class="product-actions">
+            <button class="btn view-product-btn" data-product-id="parl12" data-product-name="Parlante Bluetooth 9 con Mic" data-product-price="74100" data-product-description="Parlante Bluetooth de 9 pulgadas con micrófono, sonido potente y batería de larga duración." data-product-images='["./catalogo/parlantes/Parlante Bluetooth 9 con Mic/Parlante Bluetooth 9 con Mic 1.png", "./catalogo/parlantes/Parlante Bluetooth 9 con Mic/Parlante Bluetooth 9 con Mic 2.png", "./catalogo/parlantes/Parlante Bluetooth 9 con Mic/Parlante Bluetooth 9 con Mic 3.png"]'>
+              Ver Detalles
+            </button>
+            <button class="btn add-to-cart-btn" data-product-id="parl12" data-product-name="Parlante Bluetooth 9 con Mic" data-product-price="74100" data-product-code="PARL012" data-product-image="./catalogo/parlantes/Parlante Bluetooth 9 con Mic/Parlante Bluetooth 9 con Mic 1.png">
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Parlante Bluetooth Frente RGB 2 -->
+        <div class="product-card" data-category="parlantes" data-id="parl13" data-product-code="PARL013">
+          <div class="product-image">
+            <img src="./catalogo/parlantes/Parlante Bluetooth frente RGB 2/Parlante Bluetooth frente RGB 2.png" alt="Parlante Bluetooth Frente RGB 2" />
+          </div>
+          <h3>Parlante Bluetooth Frente RGB 2</h3>
+          <p>Parlante Bluetooth con luces RGB en el frente.</p>
+          <div class="product-details">
+            <div class="product-price"><strong>$9.450</strong></div>
+          </div>
+          <div class="product-actions">
+            <button class="btn view-product-btn" data-product-id="parl13" data-product-name="Parlante Bluetooth Frente RGB 2" data-product-price="9450" data-product-description="Parlante Bluetooth con luces RGB en el frente, sonido de calidad y diseño moderno." data-product-images='["./catalogo/parlantes/Parlante Bluetooth frente RGB 2/Parlante Bluetooth frente RGB 2.png"]'>
+              Ver Detalles
+            </button>
+            <button class="btn add-to-cart-btn" data-product-id="parl13" data-product-name="Parlante Bluetooth Frente RGB 2" data-product-price="9450" data-product-code="PARL013" data-product-image="./catalogo/parlantes/Parlante Bluetooth frente RGB 2/Parlante Bluetooth frente RGB 2.png">
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Parlante PC Barra de Sonido -->
+        <div class="product-card" data-category="parlantes" data-id="parl14" data-product-code="PARL014">
+          <div class="product-image">
+            <img src="./catalogo/parlantes/Parlante PC  Barra de sonido/Parlante PC  Barra de sonido 1.png" alt="Parlante PC Barra de Sonido" />
+          </div>
+          <h3>Parlante PC Barra de Sonido</h3>
+          <p>Barra de sonido para PC con conexión USB.</p>
+          <div class="product-details">
+            <div class="product-price"><strong>$17.940</strong></div>
+          </div>
+          <div class="product-actions">
+            <button class="btn view-product-btn" data-product-id="parl14" data-product-name="Parlante PC Barra de Sonido" data-product-price="17940" data-product-description="Barra de sonido para PC con conexión USB, sonido estéreo y diseño compacto." data-product-images='["./catalogo/parlantes/Parlante PC  Barra de sonido/Parlante PC  Barra de sonido 1.png", "./catalogo/parlantes/Parlante PC  Barra de sonido/Parlante PC  Barra de sonido 2.png", "./catalogo/parlantes/Parlante PC  Barra de sonido/Parlante PC  Barra de sonido 3.png"]'>
+              Ver Detalles
+            </button>
+            <button class="btn add-to-cart-btn" data-product-id="parl14" data-product-name="Parlante PC Barra de Sonido" data-product-price="17940" data-product-code="PARL014" data-product-image="./catalogo/parlantes/Parlante PC  Barra de sonido/Parlante PC  Barra de sonido 1.png">
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Parlantes 2.1 con Conexión 3.5mm -->
+        <div class="product-card" data-category="parlantes" data-id="parl15" data-product-code="PARL015">
+  <div class="product-image">
+    <img src="./catalogo/parlantes/Parlantes 2.1, conexión 3,5mm/Parlantes 2.1, conexión 3,5mm 1.png" alt="Parlantes 2.1 con Conexión 3.5mm" />
+  </div>
+  <h3>Parlantes 2.1 con Conexión 3.5mm</h3>
+  <p>Sistema de parlantes 2.1 con subwoofer y conexión 3.5mm.</p>
+  <div class="product-details">
+    <div class="product-price"><strong>$33.280</strong></div>
+  </div>
+  <div class="product-actions">
+    <button class="btn view-product-btn" data-product-id="parl15" data-product-name="Parlantes 2.1 con Conexión 3.5mm" data-product-price="33280" data-product-description="Sistema de parlantes 2.1 con subwoofer para bajos profundos, conexión 3.5mm para PC o laptop." data-product-images='["./catalogo/parlantes/Parlantes 2.1, conexión 3,5mm/Parlantes 2.1, conexión 3,5mm 1.png", "./catalogo/parlantes/Parlantes 2.1, conexión 3,5mm/Parlantes 2.1, conexión 3,5mm 2.png"]'>
+      Ver Detalles
+    </button>
+    <button class="btn add-to-cart-btn" data-product-id="parl15" data-product-name="Parlantes 2.1 con Conexión 3.5mm" data-product-price="33280" data-product-code="PARL015" data-product-image="./catalogo/parlantes/Parlantes 2.1, conexión 3,5mm/Parlantes 2.1, conexión 3,5mm 1.png">
+      <i class="fas fa-cart-plus"></i>
+    </button>
+  </div>
+</div>
+<div class="product-card" data-category="computacion" data-id="comp1" data-product-code="COMP001">
+  <div class="product-image">
+    <img src="./catalogo/Computacion/Adaptador Bluetooth 5.0 para PC (audio y datos)/Adaptador Bluetooth 5.0 para PC (audio y datos).png" alt="Adaptador Bluetooth 5.0 para PC (audio y datos)" />
+  </div>
+  <h3>Adaptador Bluetooth 5.0 para PC (audio y datos)</h3>
+  <p>Adaptador Bluetooth 5.0 para PC con soporte para audio y datos.</p>
+  <div class="product-details">
+        <div class="product-price"><strong>$4.500</strong></div>
+  </div>
+  <div class="product-actions">
+        <button class="btn view-product-btn" data-product-id="comp1" data-product-name="Adaptador Bluetooth 5.0 para PC (audio y datos)" data-product-price="4500" data-product-description="Permite conectar dispositivos Bluetooth a tu PC para transmisión de audio y datos con la última tecnología 5.0." data-product-images='["./catalogo/Computacion/Adaptador Bluetooth 5.0 para PC (audio y datos)/Adaptador Bluetooth 5.0 para PC (audio y datos).png"]'>
+      Ver Detalles
+    </button>
+        <button class="btn add-to-cart-btn" data-product-id="comp1" data-product-name="Adaptador Bluetooth 5.0 para PC (audio y datos)" data-product-price="4500" data-product-code="COMP001" data-product-image="./catalogo/Computacion/Adaptador Bluetooth 5.0 para PC (audio y datos)/Adaptador Bluetooth 5.0 para PC (audio y datos).png">
+      <i class="fas fa-cart-plus"></i>
+    </button>
+  </div>
+</div>
+<div class="product-card" data-category="computacion" data-id="comp2" data-product-code="COMP002">
+  <div class="product-image">
+    <img src="./catalogo/Computacion/Adaptador WiFi con antena, para PC/Adaptador WiFi con antena, para PC 1.png" alt="Adaptador WiFi con antena, para PC" />
+  </div>
+  <h3>Adaptador WiFi con antena, para PC</h3>
+  <p>Adaptador WiFi con antena externa para PC.</p>
+  <div class="product-details">
+        <div class="product-price"><strong>$7.300</strong></div>
+  </div>
+  <div class="product-actions">
+        <button class="btn view-product-btn" data-product-id="comp2" data-product-name="Adaptador WiFi con antena, para PC" data-product-price="7300" data-product-description="Mejora la conexión WiFi de tu PC con esta adaptador con antena para mejor recepción." data-product-images='["./catalogo/Computacion/Adaptador WiFi con antena, para PC/Adaptador WiFi con antena, para PC 1.png", "./catalogo/Computacion/Adaptador WiFi con antena, para PC/Adaptador WiFi con antena, para PC 2.png"]'>
+      Ver Detalles
+    </button>
+        <button class="btn add-to-cart-btn" data-product-id="comp2" data-product-name="Adaptador WiFi con antena, para PC" data-product-price="7300" data-product-code="COMP002" data-product-image="./catalogo/Computacion/Adaptador WiFi con antena, para PC/Adaptador WiFi con antena, para PC 1.png">
+      <i class="fas fa-cart-plus"></i>
+    </button>
+  </div>
+</div>
+<div class="product-card" data-category="computacion" data-id="comp3" data-product-code="COMP003">
+  <div class="product-image">
+    <img src="./catalogo/Computacion/Combo Mouse Gamer + MousePad Trust/Combo Mouse Gamer + MousePad Trust 1.png" alt="Combo Mouse Gamer + MousePad Trust" />
+  </div>
+  <h3>Combo Mouse Gamer + MousePad Trust</h3>
+  <p>Combo de mouse gamer con mousepad de la marca Trust.</p>
+  <div class="product-details">
+        <div class="product-price"><strong>$16.100</strong></div>
+  </div>
+  <div class="product-actions">
+        <button class="btn view-product-btn" data-product-id="comp3" data-product-name="Combo Mouse Gamer + MousePad Trust" data-product-price="16100" data-product-description="Combo gaming con mouse de alta precisión y mousepad optimizado para juegos." data-product-images='["./catalogo/Computacion/Combo Mouse Gamer + MousePad Trust/Combo Mouse Gamer + MousePad Trust 1.png", "./catalogo/Computacion/Combo Mouse Gamer + MousePad Trust/Combo Mouse Gamer + MousePad Trust 2.png"]'>
+          Ver Detalles
+        </button>
+        <button class="btn add-to-cart-btn" data-product-id="comp3" data-product-name="Combo Mouse Gamer + MousePad Trust" data-product-price="16100" data-product-code="COMP003" data-product-image="./catalogo/Computacion/Combo Mouse Gamer + MousePad Trust/Combo Mouse Gamer + MousePad Trust 1.png">
+          <i class="fas fa-cart-plus"></i>
+        </button>
+  </div>
+</div>
+
+<div class="product-card" data-category="computacion" data-id="comp4" data-product-code="COMP004">
+  <div class="product-image">
+    <img src="./catalogo/Computacion/Disco SSD Hiksemi 120Gb/Disco SSD Hiksemi 120Gb.png" alt="Disco SSD Hiksemi 120Gb" />
+  </div>
+  <h3>Disco SSD Hiksemi 120Gb</h3>
+  <p>Disco de estado sólido de 120GB marca Hiksemi.</p>
+  <div class="product-details">
+        <div class="product-price"><strong>$27.600</strong></div>
+  </div>
+  <div class="product-actions">
+        <button class="btn view-product-btn" data-product-id="comp4" data-product-name="Disco SSD Hiksemi 120Gb" data-product-price="27600" data-product-description="Mejora el rendimiento de tu PC con este SSD de alta velocidad y 120GB de capacidad." data-product-images='["./catalogo/Computacion/Disco SSD Hiksemi 120Gb/Disco SSD Hiksemi 120Gb.png"]'>
+      Ver Detalles
+    </button>
+        <button class="btn add-to-cart-btn" data-product-id="comp4" data-product-name="Disco SSD Hiksemi 120Gb" data-product-price="27600" data-product-code="COMP004" data-product-image="./catalogo/Computacion/Disco SSD Hiksemi 120Gb/Disco SSD Hiksemi 120Gb.png">
+      <i class="fas fa-cart-plus"></i>
+    </button>
+  </div>
+</div>
+
+<div class="product-card" data-category="computacion" data-id="comp5" data-product-code="COMP005">
+  <div class="product-image">
+    <img src="./catalogo/Computacion/Disco ssd 240gb/Disco ssd 240gb.png" alt="Disco SSD 240Gb" />
+  </div>
+  <h3>Disco SSD 240Gb</h3>
+  <p>Disco de estado sólido de 240GB de capacidad.</p>
+  <div class="product-details">
+        <div class="product-price"><strong>$45.300</strong></div>
+  </div>
+  <div class="product-actions">
+        <button class="btn view-product-btn" data-product-id="comp5" data-product-name="Disco SSD 240Gb" data-product-price="45300" data-product-description="Mayor capacidad y velocidad para tu PC con este SSD de 240GB." data-product-images='["./catalogo/Computacion/Disco ssd 240gb/Disco ssd 240gb.png"]'>
+      Ver Detalles
+    </button>
+        <button class="btn add-to-cart-btn" data-product-id="comp5" data-product-name="Disco SSD 240Gb" data-product-price="45300" data-product-code="COMP005" data-product-image="./catalogo/Computacion/Disco ssd 240gb/Disco ssd 240gb.png">
+      <i class="fas fa-cart-plus"></i>
+    </button>
+  </div>
+</div>
+
+<div class="product-card" data-category="computacion" data-id="comp6" data-product-code="COMP006">
+  <div class="product-image">
+    <img src="./catalogo/Computacion/Extensor WiFi/Extensor WiFi.png" alt="Extensor WiFi" />
+  </div>
+  <h3>Extensor WiFi</h3>
+  <p>Amplificador de señal WiFi para mayor cobertura.</p>
+  <div class="product-details">
+        <div class="product-price"><strong>$17.350</strong></div>
+  </div>
+  <div class="product-actions">
+        <button class="btn view-product-btn" data-product-id="comp6" data-product-name="Extensor WiFi" data-product-price="17350" data-product-description="Amplía la cobertura de tu red WiFi eliminando zonas sin señal en tu hogar u oficina." data-product-images='["./catalogo/Computacion/Extensor WiFi/Extensor WiFi.png"]'>
+          Ver Detalles
+        </button>
+        <button class="btn add-to-cart-btn" data-product-id="comp6" data-product-name="Extensor WiFi" data-product-price="17350" data-product-code="COMP006" data-product-image="./catalogo/Computacion/Extensor WiFi/Extensor WiFi.png">
+          <i class="fas fa-cart-plus"></i>
+        </button>
+  </div>
+</div>
+
+<div class="product-card" data-category="computacion" data-id="comp7" data-product-code="COMP007">
+  <div class="product-image">
+    <img src="./catalogo/Computacion/Extensor WiFi Tp-Link RE200/Extensor WiFi Tp-Link RE200.png" alt="Extensor WiFi Tp-Link RE200" />
+  </div>
+  <h3>Extensor WiFi Tp-Link RE200</h3>
+  <p>Extensor de red WiFi Tp-Link modelo RE200.</p>
+  <div class="product-details">
+        <div class="product-price"><strong>$61.500</strong></div>
+  </div>
+  <div class="product-actions">
+        <button class="btn view-product-btn" data-product-id="comp7" data-product-name="Extensor WiFi Tp-Link RE200" data-product-price="61500" data-product-description="Extensor de red WiFi de doble banda con tecnología AC750 para mayor velocidad y cobertura." data-product-images='["./catalogo/Computacion/Extensor WiFi Tp-Link RE200/Extensor WiFi Tp-Link RE200.png"]'>
+      Ver Detalles
+    </button>
+        <button class="btn add-to-cart-btn" data-product-id="comp7" data-product-name="Extensor WiFi Tp-Link RE200" data-product-price="61500" data-product-code="COMP007" data-product-image="./catalogo/Computacion/Extensor WiFi Tp-Link RE200/Extensor WiFi Tp-Link RE200.png">
+      <i class="fas fa-cart-plus"></i>
+    </button>
+  </div>
+</div>
+
+<div class="product-card" data-category="computacion" data-id="comp8" data-product-code="COMP008">
+  <div class="product-image">
+    <img src="./catalogo/Computacion/Hub Tipo C a 4 USB/Hub Tipo C a 4 USB.png" alt="Hub Tipo C a 4 USB" />
+  </div>
+  <h3>Hub Tipo C a 4 USB</h3>
+  <p>Adaptador USB-C a 4 puertos USB estándar.</p>
+  <div class="product-details">
+        <div class="product-price"><strong>$10.450</strong></div>
+  </div>
+  <div class="product-actions">
+        <button class="btn view-product-btn" data-product-id="comp8" data-product-name="Hub Tipo C a 4 USB" data-product-price="10450" data-product-description="Expande la conectividad de tu dispositivo con puerto USB-C a 4 puertos USB tradicionales." data-product-images='["./catalogo/Computacion/Hub Tipo C a 4 USB/Hub Tipo C a 4 USB.png"]'>
+      Ver Detalles
+    </button>
+        <button class="btn add-to-cart-btn" data-product-id="comp8" data-product-name="Hub Tipo C a 4 USB" data-product-price="10450" data-product-code="COMP008" data-product-image="./catalogo/Computacion/Hub Tipo C a 4 USB/Hub Tipo C a 4 USB.png">
+      <i class="fas fa-cart-plus"></i>
+    </button>
+  </div>
+</div>
+
+<div class="product-card" data-category="computacion" data-id="comp9" data-product-code="COMP009">
+  <div class="product-image">
+    <img src="./catalogo/Computacion/Hub USB x7/Hub USB x7 1.png" alt="Hub USB x7" />
+  </div>
+  <h3>Hub USB x7</h3>
+  <p>Concentrador USB con 7 puertos de expansión.</p>
+  <div class="product-details">
+        <div class="product-price"><strong>$10.450</strong></div>
+  </div>
+  <div class="product-actions">
+        <button class="btn view-product-btn" data-product-id="comp9" data-product-name="Hub USB x7" data-product-price="10450" data-product-description="Multiplica tus conexiones USB con este hub de 7 puertos para conectar múltiples dispositivos simultáneamente." data-product-images='["./catalogo/Computacion/Hub USB x7/Hub USB x7 1.png", "./catalogo/Computacion/Hub USB x7/Hub USB x7 2.png"]'>
+      Ver Detalles
+    </button>
+        <button class="btn add-to-cart-btn" data-product-id="comp9" data-product-name="Hub USB x7" data-product-price="10450" data-product-code="COMP009" data-product-image="./catalogo/Computacion/Hub USB x7/Hub USB x7 1.png">
+      <i class="fas fa-cart-plus"></i>
+    </button>
+  </div>
+</div>
+
+<div class="product-card" data-category="computacion" data-id="comp10" data-product-code="COMP010">
+  <div class="product-image">
+    <img src="./catalogo/Computacion/Lector de tarjeta/Lector de tarjeta.png" alt="Lector de tarjeta" />
+  </div>
+  <h3>Lector de tarjeta</h3>
+  <p>Lector de tarjetas de memoria USB.</p>
+  <div class="product-details">
+        <div class="product-price"><strong>$1.800</strong></div>
+  </div>
+  <div class="product-actions">
+        <button class="btn view-product-btn" data-product-id="comp10" data-product-name="Lector de tarjeta" data-product-price="1800" data-product-description="Lector de tarjetas de memoria compacto con conexión USB para transferir archivos fácilmente." data-product-images='["./catalogo/Computacion/Lector de tarjeta/Lector de tarjeta.png"]'>
+      Ver Detalles
+    </button>
+        <button class="btn add-to-cart-btn" data-product-id="comp10" data-product-name="Lector de tarjeta" data-product-price="1800" data-product-code="COMP010" data-product-image="./catalogo/Computacion/Lector de tarjeta/Lector de tarjeta.png">
+      <i class="fas fa-cart-plus"></i>
+    </button>
+  </div>
+</div>
+
+<div class="product-card" data-category="computacion" data-id="comp11" data-product-code="COMP011">
+  <div class="product-image">
+    <img src="./catalogo/Computacion/MicroSD Hiksemi 128Gb/MicroSD Hiksemi 128Gb.png" alt="MicroSD Hiksemi 128Gb" />
+  </div>
+  <h3>MicroSD Hiksemi 128Gb</h3>
+  <p>Tarjeta microSD de 128GB marca Hiksemi.</p>
+  <div class="product-details">
+        <div class="product-price"><strong>$19.250</strong></div>
+  </div>
+  <div class="product-actions">
+        <button class="btn view-product-btn" data-product-id="comp11" data-product-name="MicroSD Hiksemi 128Gb" data-product-price="19250" data-product-description="Gran capacidad de almacenamiento para dispositivos móviles, cámaras y más." data-product-images='["./catalogo/Computacion/MicroSD Hiksemi 128Gb/MicroSD Hiksemi 128Gb.png"]'>
+      Ver Detalles
+    </button>
+        <button class="btn add-to-cart-btn" data-product-id="comp11" data-product-name="MicroSD Hiksemi 128Gb" data-product-price="19250" data-product-code="COMP011" data-product-image="./catalogo/Computacion/MicroSD Hiksemi 128Gb/MicroSD Hiksemi 128Gb.png">
+      <i class="fas fa-cart-plus"></i>
+    </button>
+  </div>
+</div>
+
+<div class="product-card" data-category="computacion" data-id="comp12" data-product-code="COMP012">
+  <div class="product-image">
+    <img src="./catalogo/Computacion/MicroSD Hiksemi 32Gb/MicroSD Hiksemi 32Gb.png" alt="MicroSD Hiksemi 32Gb" />
+  </div>
+  <h3>MicroSD Hiksemi 32Gb</h3>
+  <p>Tarjeta microSD de 32GB marca Hiksemi.</p>
+  <div class="product-details">
+        <div class="product-price"><strong>$7.770</strong></div>
+  </div>
+  <div class="product-actions">
+        <button class="btn view-product-btn" data-product-id="comp12" data-product-name="MicroSD Hiksemi 32Gb" data-product-price="7770" data-product-description="Tarjeta de memoria confiable para almacenamiento adicional en dispositivos móviles." data-product-images='["./catalogo/Computacion/MicroSD Hiksemi 32Gb/MicroSD Hiksemi 32Gb.png"]'>
+      Ver Detalles
+    </button>
+        <button class="btn add-to-cart-btn" data-product-id="comp12" data-product-name="MicroSD Hiksemi 32Gb" data-product-price="7770" data-product-code="COMP012" data-product-image="./catalogo/Computacion/MicroSD Hiksemi 32Gb/MicroSD Hiksemi 32Gb.png">
+      <i class="fas fa-cart-plus"></i>
+    </button>
+  </div>
+</div>
+<div class="product-card" data-category="computacion" data-id="comp13" data-product-code="COMP013">
+  <div class="product-image">
+    <img src="./catalogo/Computacion/MicroSD Hiksemi 64Gb/MicroSD Hiksemi 64Gb.png" alt="MicroSD Hiksemi 64Gb" />
+  </div>
+  <h3>MicroSD Hiksemi 64Gb</h3>
+  <p>Tarjeta microSD de 64GB marca Hiksemi.</p>
+  <div class="product-details">
+        <div class="product-price"><strong>$13.200</strong></div>
+  </div>
+  <div class="product-actions">
+    <button class="btn view-product-btn" data-product-id="comp13" data-product-name="MicroSD Hiksemi 64Gb" data-product-price="13200" data-product-description="Mayor capacidad para almacenar fotos, videos y apps." data-product-images='["./catalogo/Computacion/MicroSD Hiksemi 64Gb/MicroSD Hiksemi 64Gb.png"]'>
+      Ver Detalles
+    </button>
+    <button class="btn add-to-cart-btn" data-product-id="comp13" data-product-name="MicroSD Hiksemi 64Gb" data-product-price="13200" data-product-code="COMP013" data-product-image="./catalogo/Computacion/MicroSD Hiksemi 64Gb/MicroSD Hiksemi 64Gb.png">
+      <i class="fas fa-cart-plus"></i>
+    </button>
+  </div>
+</div>
+<div class="product-card" data-category="computacion" data-id="comp14" data-product-code="COMP014">
+  <div class="product-image">
+    <img src="./catalogo/Computacion/Mouse inalámbrico Genius/Mouse inalámbrico Genius 1.png" alt="Mouse inalámbrico Genius" />
+  </div>
+  <h3>Mouse inalámbrico Genius</h3>
+  <p>Mouse inalámbrico de la marca Genius.</p>
+  <div class="product-details">
+    <div class="product-price"><strong>$16.800</strong></div>
+  </div>
+  <div class="product-actions">
+    <button class="btn view-product-btn" data-product-id="comp14" data-product-name="Mouse inalámbrico Genius" data-product-price="16800" data-product-description="Mouse inalámbrico ergonómico con conexión estable y larga duración de batería." data-product-images='["./catalogo/Computacion/Mouse inalámbrico Genius/Mouse inalámbrico Genius 1.png", "./catalogo/Computacion/Mouse inalámbrico Genius/Mouse inalámbrico Genius 2.png", "./catalogo/Computacion/Mouse inalámbrico Genius/Mouse inalámbrico Genius 3.png"]'>
+      Ver Detalles
+    </button>
+    <button class="btn add-to-cart-btn" data-product-id="comp14" data-product-name="Mouse inalámbrico Genius" data-product-price="16800" data-product-code="COMP014" data-product-image="./catalogo/Computacion/Mouse inalámbrico Genius/Mouse inalámbrico Genius 1.png">
+      <i class="fas fa-cart-plus"></i>
+    </button>
+  </div>
+</div>
+
+<div class="product-card" data-category="computacion" data-id="comp15" data-product-code="COMP015">
+  <div class="product-image">
+    <img src="./catalogo/Computacion/Mouse inalámbrico Logitech/Mouse inalámbrico Logitech.png" alt="Mouse inalámbrico Logitech" />
+  </div>
+  <h3>Mouse inalámbrico Logitech</h3>
+  <p>Mouse inalámbrico de la marca Logitech.</p>
+  <div class="product-details">
+    <div class="product-price"><strong>$18.500</strong></div>
+  </div>
+  <div class="product-actions">
+    <button class="btn view-product-btn" data-product-id="comp15" data-product-name="Mouse inalámbrico Logitech" data-product-price="18500" data-product-description="Mouse inalámbrico de alta precisión con diseño ergonómico y conectividad confiable." data-product-images='["./catalogo/Computacion/Mouse inalámbrico Logitech/Mouse inalámbrico Logitech.png"]'>
+      Ver Detalles
+    </button>
+    <button class="btn add-to-cart-btn" data-product-id="comp15" data-product-name="Mouse inalámbrico Logitech" data-product-price="18500" data-product-code="COMP015" data-product-image="./catalogo/Computacion/Mouse inalámbrico Logitech/Mouse inalámbrico Logitech.png">
+      <i class="fas fa-cart-plus"></i>
+    </button>
+  </div>
+</div>
+
+<div class="product-card" data-category="computacion" data-id="comp16" data-product-code="COMP016">
+  <div class="product-image">
+    <img src="./catalogo/Computacion/Mouse inalámbrico negro/Mouse inalámbrico.png" alt="Mouse inalámbrico negro" />
+  </div>
+  <h3>Mouse inalámbrico negro</h3>
+  <p>Mouse inalámbrico en color negro.</p>
+  <div class="product-details">
+    <div class="product-price"><strong>$6.600</strong></div>
+  </div>
+  <div class="product-actions">
+    <button class="btn view-product-btn" data-product-id="comp16" data-product-name="Mouse inalámbrico negro" data-product-price="6600" data-product-description="Mouse inalámbrico compacto y elegante en color negro, ideal para uso diario." data-product-images='["./catalogo/Computacion/Mouse inalámbrico negro/Mouse inalámbrico.png"]'>
+      Ver Detalles
+    </button>
+    <button class="btn add-to-cart-btn" data-product-id="comp16" data-product-name="Mouse inalámbrico negro" data-product-price="6600" data-product-code="COMP016" data-product-image="./catalogo/Computacion/Mouse inalámbrico negro/Mouse inalámbrico.png">
+      <i class="fas fa-cart-plus"></i>
+    </button>
+  </div>
+</div>
+
+<div class="product-card" data-category="computacion" data-id="comp17" data-product-code="COMP017">
+  <div class="product-image">
+    <img src="./catalogo/Computacion/Mouse inalámbrico recargable/Mouse inalámbrico 1.png" alt="Mouse inalámbrico recargable" />
+  </div>
+  <h3>Mouse inalámbrico recargable</h3>
+  <p>Mouse inalámbrico con batería recargable.</p>
+  <div class="product-details">
+    <div class="product-price"><strong>$8.700</strong></div>
+  </div>
+  <div class="product-actions">
+    <button class="btn view-product-btn" data-product-id="comp17" data-product-name="Mouse inalámbrico recargable" data-product-price="8700" data-product-description="Mouse inalámbrico con batería recargable vía USB, para un uso prolongado sin interrupciones." data-product-images='["./catalogo/Computacion/Mouse inalámbrico recargable/Mouse inalámbrico 1.png", "./catalogo/Computacion/Mouse inalámbrico recargable/Mouse inalámbrico 2.png"]'>
+      Ver Detalles
+    </button>
+    <button class="btn add-to-cart-btn" data-product-id="comp17" data-product-name="Mouse inalámbrico recargable" data-product-price="8700" data-product-code="COMP017" data-product-image="./catalogo/Computacion/Mouse inalámbrico recargable/Mouse inalámbrico 1.png">
+      <i class="fas fa-cart-plus"></i>
+    </button>
+  </div>
+</div>
+
+<div class="product-card" data-category="computacion" data-id="comp18" data-product-code="COMP018">
+  <div class="product-image">
+    <img src="./catalogo/Computacion/PEN DRIVE KG 64GB PL/PenDrive Kingston 64gb 1.png" alt="PEN DRIVE KG 64GB PL" />
+  </div>
+  <h3>PEN DRIVE KG 64GB PL</h3>
+  <p>Pen drive de 64GB modelo KG PL.</p>
+  <div class="product-details">
+    <div class="product-price"><strong>$15.600</strong></div>
+  </div>
+  <div class="product-actions">
+    <button class="btn view-product-btn" data-product-id="comp18" data-product-name="PEN DRIVE KG 64GB PL" data-product-price="15600" data-product-description="Unidad USB de 64GB con diseño compacto y alta velocidad de transferencia." data-product-images='["./catalogo/Computacion/PEN DRIVE KG 64GB PL/PenDrive Kingston 64gb 1.png", "./catalogo/Computacion/PEN DRIVE KG 64GB PL/PenDrive Kingston 64gb 2.png"]'>
+      Ver Detalles
+    </button>
+    <button class="btn add-to-cart-btn" data-product-id="comp18" data-product-name="PEN DRIVE KG 64GB PL" data-product-price="15600" data-product-code="COMP018" data-product-image="./catalogo/Computacion/PEN DRIVE KG 64GB PL/PenDrive Kingston 64gb 1.png">
+      <i class="fas fa-cart-plus"></i>
+    </button>
+  </div>
+</div>
+
+<div class="product-card" data-category="computacion" data-id="comp19" data-product-code="COMP019">
+  <div class="product-image">
+    <img src="./catalogo/Computacion/PenDrive HP mini 64Gb/PenDrive HP mini 64Gb 1.png" alt="PenDrive HP mini 64Gb" />
+  </div>
+  <h3>PenDrive HP mini 64Gb</h3>
+  <p>Pen drive mini de 64GB marca HP.</p>
+  <div class="product-details">
+    <div class="product-price"><strong>$15.600</strong></div>
+  </div>
+  <div class="product-actions">
+    <button class="btn view-product-btn" data-product-id="comp19" data-product-name="PenDrive HP mini 64Gb" data-product-price="15600" data-product-description="Pen drive compacto de 64GB ideal para llevar datos en el bolsillo." data-product-images='["./catalogo/Computacion/PenDrive HP mini 64Gb/PenDrive HP mini 64Gb 1.png", "./catalogo/Computacion/PenDrive HP mini 64Gb/PenDrive HP mini 64Gb 2.png", "./catalogo/Computacion/PenDrive HP mini 64Gb/PenDrive HP mini 64Gb 3.png"]'>
+      Ver Detalles
+    </button>
+    <button class="btn add-to-cart-btn" data-product-id="comp19" data-product-name="PenDrive HP mini 64Gb" data-product-price="15600" data-product-code="COMP019" data-product-image="./catalogo/Computacion/PenDrive HP mini 64Gb/PenDrive HP mini 64Gb 1.png">
+      <i class="fas fa-cart-plus"></i>
+    </button>
+  </div>
+</div>
+
+<div class="product-card" data-category="computacion" data-id="comp20" data-product-code="COMP020">
+  <div class="product-image">
+    <img src="./catalogo/Computacion/PenDrive Kingston 128gb/PenDrive Kingston 128gb 1.png" alt="PenDrive Kingston 128gb" />
+  </div>
+  <h3>PenDrive Kingston 128gb</h3>
+  <p>Pen drive de 128GB marca Kingston.</p>
+  <div class="product-details">
+    <div class="product-price"><strong>$22.500</strong></div>
+  </div>
+  <div class="product-actions">
+    <button class="btn view-product-btn" data-product-id="comp20" data-product-name="PenDrive Kingston 128gb" data-product-price="22500" data-product-description="Alta capacidad de 128GB para almacenar grandes cantidades de datos." data-product-images='["./catalogo/Computacion/PenDrive Kingston 128gb/PenDrive Kingston 128gb 1.png", "./catalogo/Computacion/PenDrive Kingston 128gb/PenDrive Kingston 128gb 2.png"]'>
+      Ver Detalles
+    </button>
+    <button class="btn add-to-cart-btn" data-product-id="comp20" data-product-name="PenDrive Kingston 128gb" data-product-price="22500" data-product-code="COMP020" data-product-image="./catalogo/Computacion/PenDrive Kingston 128gb/PenDrive Kingston 128gb 1.png">
+      <i class="fas fa-cart-plus"></i>
+    </button>
+  </div></button>
+</div>
+
+<div class="product-card" data-category="computacion" data-id="comp21" data-product-code="COMP021">
+  <div class="product-image">
+    <img src="./catalogo/Computacion/PenDrive Kingston 64Gb metálico/PenDrive Kingston 64Gb metálico.png" alt="PenDrive Kingston 64Gb metálico" />
+  </div>
+  <h3>PenDrive Kingston 64Gb metálico</h3>
+  <p>Pen drive metálico de 64GB marca Kingston.</p>
+  <div class="product-details">
+    <div class="product-price"><strong>$31.600</strong></div>
+  </div>
+  <div class="product-actions">
+    <button class="btn view-product-btn" data-product-id="comp21" data-product-name="PenDrive Kingston 64Gb metálico" data-product-price="31600" data-product-description="Diseño metálico resistente con 64GB de almacenamiento." data-product-images='["./catalogo/Computacion/PenDrive Kingston 64Gb metálico/PenDrive Kingston 64Gb metálico.png"]'>
+      Ver Detalles
+    </button>
+    <button class="btn add-to-cart-btn" data-product-id="comp21" data-product-name="PenDrive Kingston 64Gb metálico" data-product-price="31600" data-product-code="COMP021" data-product-image="./catalogo/Computacion/PenDrive Kingston 64Gb metálico/PenDrive Kingston 64Gb metálico.png">
+      <i class="fas fa-cart-plus"></i>
+    </button>
+  </div>
+</div>
+
+<div class="product-card" data-category="computacion" data-id="comp22" data-product-code="COMP022">
+  <div class="product-image">
+    <img src="./catalogo/Computacion/Pendrive Tipo C 32Gb Kingston/Pendrive Tipo C 32Gb Kingston.png" alt="Pendrive Tipo C 32Gb Kingston" />
+  </div>
+  <h3>Pendrive Tipo C 32Gb Kingston</h3>
+  <p>Pen drive Tipo C de 32GB marca Kingston.</p>
+  <div class="product-details">
+    <div class="product-price"><strong>$11.300</strong></div>
+  </div>
+  <div class="product-actions">
+    <button class="btn view-product-btn" data-product-id="comp22" data-product-name="Pendrive Tipo C 32Gb Kingston" data-product-price="11300" data-product-description="Conector Tipo C para compatibilidad con dispositivos modernos, 32GB." data-product-images='["./catalogo/Computacion/Pendrive Tipo C 32Gb Kingston/Pendrive Tipo C 32Gb Kingston.png"]'>
+      Ver Detalles
+    </button>
+    <button class="btn add-to-cart-btn" data-product-id="comp22" data-product-name="Pendrive Tipo C 32Gb Kingston" data-product-price="11300" data-product-code="COMP022" data-product-image="./catalogo/Computacion/Pendrive Tipo C 32Gb Kingston/Pendrive Tipo C 32Gb Kingston.png">
+      <i class="fas fa-cart-plus"></i>
+    </button>
+  </div>
+</div>
+</button>
+<div class="product-card" data-category="computacion" data-id="comp23" data-product-code="COMP023">
+  <div class="product-image">
+    <img src="./catalogo/Computacion/Placa de sonido USB/Placa de sonido USB.png" alt="Placa de sonido USB" />
+  </div>
+  <h3>Placa de sonido USB</h3>
+  <p>Adaptador de sonido externo vía USB.</p>
+  <div class="product-details">
+    <div class="product-price"><strong>$2.800</strong></div>
+  </div>
+  <div class="product-actions">
+    <button class="btn view-product-btn" data-product-id="comp23" data-product-name="Placa de sonido USB" data-product-price="2800" data-product-description="Mejora el audio de tu PC con esta placa de sonido USB externa." data-product-images='["./catalogo/Computacion/Placa de sonido USB/Placa de sonido USB.png"]'>
+      Ver Detalles
+    </button>
+    <button class="btn add-to-cart-btn" data-product-id="comp23" data-product-name="Placa de sonido USB" data-product-price="2800" data-product-code="COMP023" data-product-image="./catalogo/Computacion/Placa de sonido USB/Placa de sonido USB.png">
+      <i class="fas fa-cart-plus"></i>
+    </button>
+  </div>
+</div>
+
+<div class="product-card" data-category="computacion" data-id="comp24" data-product-code="COMP024">
+  <div class="product-image">
+    <img src="./catalogo/Computacion/Placa WiFi USB Tp-Link/Placa WiFi USB Tp-Link.png" alt="Placa WiFi USB Tp-Link" />
+  </div>
+  <h3>Placa WiFi USB Tp-Link</h3>
+  <p>Adaptador WiFi USB de la marca Tp-Link.</p>
+  <div class="product-details">
+    <div class="product-price"><strong>$18.900</strong></div>
+  </div>
+  <div class="product-actions">
+    <button class="btn view-product-btn" data-product-id="comp24" data-product-name="Placa WiFi USB Tp-Link" data-product-price="18900" data-product-description="Agrega conectividad WiFi a tu PC con este adaptador USB de Tp-Link." data-product-images='["./catalogo/Computacion/Placa WiFi USB Tp-Link/Placa WiFi USB Tp-Link.png"]'>
+      Ver Detalles
+    </button>
+    <button class="btn add-to-cart-btn" data-product-id="comp24" data-product-name="Placa WiFi USB Tp-Link" data-product-price="18900" data-product-code="COMP024" data-product-image="./catalogo/Computacion/Placa WiFi USB Tp-Link/Placa WiFi USB Tp-Link.png">
+      <i class="fas fa-cart-plus"></i>
+    </button>
+  </div>
+</div>
+
+<div class="product-card" data-category="computacion" data-id="comp25" data-product-code="COMP025">
+  <div class="product-image">
+    <img src="./catalogo/Computacion/multi Lector de tarjeta/multi Lector de tarjeta.png" alt="multi Lector de tarjeta" />
+  </div>
+  <h3>multi Lector de tarjeta</h3>
+  <p>Lector de tarjetas múltiple para varios formatos.</p>
+  <div class="product-details">
+    <div class="product-price"><strong>$1.200</strong></div>
+  </div>
+  <div class="product-actions">
+    <button class="btn view-product-btn" data-product-id="comp25" data-product-name="multi Lector de tarjeta" data-product-price="1200" data-product-description="Lector versátil para SD, microSD y otros formatos de tarjetas." data-product-images='["./catalogo/Computacion/multi Lector de tarjeta/multi Lector de tarjeta.png"]'>
+      Ver Detalles
+    </button>
+    <button class="btn add-to-cart-btn" data-product-id="comp25" data-product-name="multi Lector de tarjeta" data-product-price="1200" data-product-code="COMP025" data-product-image="./catalogo/Computacion/multi Lector de tarjeta/multi Lector de tarjeta.png">
+      <i class="fas fa-cart-plus"></i>
+    </button>
+  </div>
+</div>
+<!-- Productos de Computación -->
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="catalog-cta">
+      <div class="cta-content">
+        <h2>¿No encuentra lo que busca?</h2>
+        <p>Contáctenos para consultar por otros productos no listados en nuestro catálogo</p>
+        <a href="index.html#contacto" class="btn primary-btn">Contactar Ahora</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===============================
+       PIE DE PÁGINA
+  ================================== -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img src="CODEMACH.png" alt="CODEMACH Logo" class="logo" />
+      </div>
+
+      <div class="footer-links">
+        <div class="footer-column">
+          <h3>Navegación</h3>
+          <ul>
+
+            <li><a href="https://webmach.com.ar/" Target=»_blank» >Quiénes Somos</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Categorías</h3>
+          <ul>
+            <li><a href="#" data-filter="auriculares">Auriculares</a></li>
+            <li><a href="#" data-filter="parlantes">Parlantes</a></li>
+            <li><a href="#" data-filter="teclados">Teclados</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Legal</h3>
+          <ul>
+            <li><a href="#">Términos y Condiciones</a></li>
+            <li><a href="#">Política de Privacidad</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 CODEMACH. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script src="script.js"></script>
+  <script src="catalogo.js"></script>
+</body>
+</html>
