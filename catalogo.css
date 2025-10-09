@@ -1,3 +1,4 @@
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -10,7 +11,7 @@
 }
 
 /* ===============================
-   SECCIÃ“N HERO DEL CATÃLOGO
+   SECCIÃN HERO DEL CATÃLOGO
 ================================ */
 .catalog-hero {
     position: relative;
@@ -202,7 +203,7 @@
     flex: 1;
     padding: 10px;
     font-size: -1.1rem;
-    background-color: #000000;
+    background-color: #b7b7b7;
     color: var(--bg-color);
     border: none;
     border-radius: 5px;
@@ -839,7 +840,7 @@
     }
     .cart-icon {
       margin-left: 0px;
-      right: -62px;
+      right: -8px;
     }
 }
 
